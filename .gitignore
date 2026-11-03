@@ -1,0 +1,13 @@
+.Rproj.user/
+.Rhistory
+.DS_Store
+.quarto/
+renv/library/
+renv/staging/
+/.Rdata
+
+/.quarto/
+**/*.quarto_ipynb
+
+docs/
+Defender-Attacker-Game-Project-Outline.html
