@@ -65,9 +65,8 @@ Scripts never render; pages never solve. Pages read cached results from `data/re
 
 ## Open items
 
-- The Three Questions model-governance link on the Governance page is a placeholder until the owner supplies the URL.
-- Calibration references (IBM Cost of a Data Breach, Verizon DBIR, Coveware, Cyentia IRIS, FAIR Institute) are not yet cited; none will be quoted without verified figures and URLs.
-- The repository is not under git. Nothing has been committed or published.
+- Calibration references (IBM Cost of a Data Breach, Verizon DBIR, Coveware, Cyentia IRIS, FAIR Institute) are not yet cited. The owner is adding them; each needs a verified edition, figure and full URL before it goes on the site.
+- The repository is public on GitHub (`patrick-lefler/rQuarto_defender_attacker-game_theory`). The rendered `docs/` folder is added in a separate PR, and GitHub Pages (source `main`, folder `/docs`) is enabled only after the owner approves.
 - Visual QA at 390 px width: tables now scroll inside their container; figures scale. A second pass on the owner's own device is still advisable.
 
 ## Change log
