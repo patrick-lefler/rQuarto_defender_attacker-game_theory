@@ -1,0 +1,11 @@
+id,assumption,why_it_matters,how_it_could_fail,where_tested
+A1,One ransomware campaign per year,Loss figures are per campaign; the budget is annual,Several campaigns or repeat attacks would multiply loss and change the best trade-offs,Not tested (out of scope: repeated play)
+A2,Single adversary type,The crew's payoffs drive every strategy,Different attackers (insiders; nation-states) want different assets,Not tested (out of scope: attacker mixtures)
+A3,The crew observes coverage before choosing a target,Equilibrium logic relies on the attacker responding to what it sees,An attacker who cannot see defences attacks closer to its prior,Partly tested through the noisy-crew sweep (page 4)
+A4,Coverage cost is linear,Linear cost makes the allocation a clean budget split,Real controls show diminishing returns and fixed costs,Not tested
+A5,Coverage acts as the probability an attack is stopped,Turns spending into loss reduction,Controls fail in correlated ways; coverage may not map to a probability,Not tested
+A6,A stopped attack still costs 10% of the full loss,Sets the value of coverage for the defender,A higher share weakens the gain from coverage; a lower share strengthens it,Not tested (parameter range in params.yaml)
+A7,Every asset keeps at least 25% hygiene coverage,Fixes a minimum on every asset including low-value ones,A different floor changes how much budget is free to allocate,Not tested (parameter range in params.yaml)
+A8,Synthetic calibration,All asset values are illustrative,Real values could reorder the strategies,Misestimation Monte Carlo (page 4) stresses the crew's payoffs only
+A9,Robust rationality parameter lambda = 2,Controls how noisy the robust strategy assumes the crew is,A very different crew would make a different lambda best,Lambda sweep (page 4)
+A10,Crew payoff error is lognormal with sigma 0.35,Defines how badly the firm may misjudge the crew,Larger or biased errors would hurt every strategy,Monte Carlo seed-stability check (diagnostics)

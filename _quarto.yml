@@ -1,0 +1,51 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - 01-the-game.qmd
+    - 02-allocation.qmd
+    - 03-robustness.qmd
+    - 04-governance.qmd
+
+website:
+  title: "Where Will the Attacker Strike?"
+  description: "Game-Theoretic Allocation of a Security Budget"
+  search: false
+  page-navigation: true
+  sidebar:
+    style: floating
+    contents:
+      - href: index.qmd
+        text: Summary
+      - href: 01-the-game.qmd
+        text: The Game
+      - href: 02-allocation.qmd
+        text: Allocation
+      - href: 03-robustness.qmd
+        text: Robustness
+      - href: 04-governance.qmd
+        text: Governance
+  page-footer:
+    center: "Seeking Eureka · Illustrative synthetic analysis · Not investment or security advice"
+    right:
+      - text: "Seeking Eureka projects"
+        href: https://seeking-eureka.com/projects.html
+
+format:
+  html:
+    code-fold: true
+    df-print: paged
+    fig-width: 8
+    fig-height: 5
+    lightbox: true
+    linkcolor: "#0166CC"
+    theme: [sandstone, theme.scss]
+    css: styles.css
+    toc: true
+    toc-depth: 3
+
+execute:
+  warning: false
+  message: false
+  freeze: auto

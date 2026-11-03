@@ -1,0 +1,89 @@
+---
+title: "Governance & Audit"
+subtitle: "Where Will the Attacker Strike? Assumptions, limits and checks"
+---
+
+```{r}
+#| include: false
+source("R/00_params.R"); source("R/01_utils.R"); source("R/90_theme.R")
+library(dplyr); library(ggplot2); library(gt)
+diag <- read_result("diagnostics")
+si <- read_result("session_info")
+reg <- readr::read_csv(file.path(PROJECT_ROOT, "data", "assumptions_register.csv"), show_col_types = FALSE)
+n_pass <- sum(diag$result == "pass")
+```
+
+*All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.*
+
+## How a board should use this
+
+Use this analysis as a challenge to the budget, not as an allocation engine. The numbers are synthetic. What carries over to your own firm is the logic: attackers respond to what we defend, and the best plan is the one that still works when our read of the attacker is wrong.
+
+A board can ask three things. Does our plan state who we think the attacker is? Has anyone tested the plan against a different attacker? What would we change if our threat intelligence were wrong by a third?
+
+## Assumptions register
+
+```{r}
+#| label: tbl-assumptions
+#| tbl-cap: "Assumptions behind the analysis, why each matters, how it could fail, and where it is tested."
+reg |>
+  gt() |>
+  cols_label(id = "ID", assumption = "Assumption", why_it_matters = "Why it matters",
+             how_it_could_fail = "How it could fail", where_tested = "Where tested") |>
+  gt_se() |>
+  cols_align(align = "left")
+```
+
+::: {.reader-note}
+**How to read the table.** Each row is something we assumed to build the model. The columns say why the assumption matters, how it could turn out wrong, and where this site tests it, if anywhere.
+
+**What the table tells you.** Several assumptions are not tested here. These are the first places to look when applying the approach to real data, because a wrong assumption can reorder the strategies.
+:::
+
+## Limitations
+
+The model has no repeated play: one campaign, one decision. It has no deception or honeypots, which can change what the crew sees. It has one attacker type, so insiders and state actors are out of scope. The budget is static, so it does not respond to new intelligence during the year.
+
+Natural follow-ons are repeated play, mixtures of attacker types, and the attack-graph Markov chain project.
+
+## Further reading
+
+The Three Questions model-governance framework: *link to be supplied by the project owner*.
+
+## Diagnostics
+
+All `r nrow(diag)` automated checks ran when the results were built; `r n_pass` passed.
+
+```{r}
+#| label: tbl-diagnostics
+#| tbl-cap: "Automated checks run when the results were built."
+diag |>
+  gt() |>
+  cols_label(check = "Check", result = "Result", detail = "Detail") |>
+  gt_se() |>
+  cols_align(align = "left")
+```
+
+::: {.reader-note}
+**How to read the table.** Each row is a test of the calculations. "Pass" means the check met its standard. The detail column states what was checked.
+
+**What the table tells you.** The checks cover the solver, the budget, the Monte Carlo draws and the word limit. A pass says the arithmetic is consistent, not that the assumptions are right.
+:::
+
+```{r}
+#| label: tbl-session
+#| tbl-cap: "Software versions and seed used to build the results."
+tibble::tibble(
+  Item = c("R", "Seed", names(si$packages)),
+  Value = c(si$r_version, as.character(si$seed), unname(si$packages))
+) |>
+  gt() |>
+  gt_se() |>
+  cols_align(align = "left")
+```
+
+::: {.reader-note}
+**How to read the table.** The first row is the R version, the second the random seed, and the rest are the software packages that matter for the results.
+
+**What the table tells you.** Anyone with these versions and seed can reproduce the numbers on this site exactly. A different seed gives slightly different Monte Carlo results.
+:::

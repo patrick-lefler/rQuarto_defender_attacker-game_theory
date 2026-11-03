@@ -1,0 +1,145 @@
+---
+title: "Allocating the Budget"
+subtitle: "Where Will the Attacker Strike? Four ways to split a security budget"
+---
+
+```{r}
+#| include: false
+source("R/00_params.R"); source("R/01_utils.R"); source("R/90_theme.R")
+library(dplyr); library(ggplot2); library(gt)
+assets <- load_assets()
+base <- read_result("strategies_base")
+sm <- base$summary
+al <- read_result("alignment")$summary
+loss_of <- \(s) sm$loss_rational[sm$strategy == s]
+target_of <- \(s) sm$target[sm$strategy == s]
+cov_of <- \(s, id) base$strategies$coverage[base$strategies$strategy == s & base$strategies$asset_id == id]
+nm <- \(id) ASSET_SHORT[[id]]
+n_tie <- length(base$textbook_attack_set)
+```
+
+*All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.*
+
+## The firm
+
+The firm has 500 staff. Its cloud platform is critical infrastructure for its bank and broker clients. It has `r fmt_m(BUDGET_BASE)` a year to allocate across six assets. That budget includes a hygiene floor: every asset keeps at least `r fmt_pct(COVERAGE_FLOOR)` coverage, because compliance demands it.
+
+```{r}
+#| label: tbl-assets
+#| tbl-cap: "The six assets and their parameters. Illustrative values."
+mu <- log(assets$L) - LOSS_SIGMA^2 / 2
+assets |>
+  mutate(
+    Asset = ASSET_SHORT[asset_id],
+    median = exp(mu),
+    lo = exp(mu - 1.645 * LOSS_SIGMA),
+    hi = exp(mu + 1.645 * LOSS_SIGMA),
+    ci = sprintf("%.1f to %.1f", lo, hi)
+  ) |>
+  select(Asset, L, median, ci, V, k, c_max, p_heat) |>
+  gt() |>
+  tab_spanner("Defender loss ($M)", columns = c(L, median, ci)) |>
+  cols_label(L = "Mean", median = "Median", ci = "90% interval", V = "Crew value ($M)",
+             k = "Cost to cover ($M)", c_max = "Coverage cap", p_heat = "Heat-map likelihood") |>
+  fmt_number(columns = c(L, median, V, k), decimals = 1) |>
+  fmt_number(columns = c(c_max, p_heat), decimals = 2) |>
+  tab_source_note("Illustrative values. Loss is treated as the mean of a lognormal with sigma = 0.8; median and interval are shown for context only.") |>
+  gt_se()
+```
+
+::: {.reader-note}
+**How to read the table.** Each row is an asset. The first block is what a successful attack would cost us. "Crew value" is what the crew gains from a successful attack. "Cost to cover" is the price of full coverage, and the cap is the most protection we can reach. The last column feeds two of the strategies.
+
+**What the table tells you.** Our biggest loss (the pipeline) is among the crew's least valued targets, while identity is the crew's favourite and costs us far less. The wide 90% intervals warn that a typical loss can differ greatly from the average.
+:::
+
+## Where we and the crew disagree
+
+```{r}
+#| label: fig-divergence
+#| fig-cap: "Rank of each asset by our loss against rank by the crew's value. Distance from the diagonal measures disagreement."
+#| fig-alt: "Scatter plot of six assets by rank of defender loss on the horizontal axis and rank of crew value on the vertical axis, with a diagonal reference line. Pipeline and identity lie far from the line; platform lies on it."
+assets |>
+  mutate(rank_L = rank(L), rank_V = rank(V), label = ASSET_SHORT[asset_id]) |>
+  ggplot(aes(rank_L, rank_V)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50") +
+  geom_point(size = 3.5, color = "#0166CC") +
+  ggrepel::geom_text_repel(aes(label = label), size = 4, box.padding = 0.5) +
+  scale_x_continuous(breaks = 1:6, limits = c(0.7, 6.3)) +
+  scale_y_continuous(breaks = 1:6, limits = c(0.7, 6.3)) +
+  labs(x = "Rank by our loss (6 = largest)", y = "Rank by crew value (6 = most attractive)",
+       title = "Our biggest worries are not the crew's favourites")
+```
+
+::: {.reader-note}
+**How to read the plot.** Each dot is an asset. Moving right means a larger loss for us; moving up means more attractive to the crew. The dashed diagonal marks assets where both sides agree on the ranking.
+
+**What the plot tells you.** The pipeline is our largest loss but ranks last for the crew, so the crew has little reason to attack it. Identity is the reverse. A plan built only on our own risk ranking will misjudge where the crew goes.
+:::
+
+## Four strategies at the base budget
+
+We compare four ways to spend `r fmt_m(BUDGET_BASE)`. The robust strategy joins on page 4.
+
+```{r}
+#| label: fig-coverage-small-multiples
+#| fig-cap: "Coverage by asset under four strategies. The crew's chosen target is highlighted in each panel."
+#| fig-alt: "Four bar-chart panels, one per strategy, showing coverage on each of six assets. The attacked asset is highlighted: identity for risk-ranked, proportional and uniform, and corporate IT for the textbook equilibrium."
+#| fig-height: 6
+four <- c("risk_ranked", "proportional", "uniform", "textbook")
+base$strategies |>
+  filter(strategy %in% four) |>
+  left_join(sm |> select(strategy, target), by = "strategy") |>
+  mutate(
+    strategy = factor(STRAT_LABELS[strategy], levels = STRAT_LABELS[four]),
+    asset = factor(ASSET_SHORT[asset_id], levels = ASSET_SHORT),
+    hit = ifelse(asset_id == target, "Crew's target", "Other asset")
+  ) |>
+  ggplot(aes(asset, coverage, fill = hit)) +
+  geom_col(width = 0.75) +
+  facet_wrap(~strategy, ncol = 2) +
+  scale_fill_manual(values = c("Crew's target" = "#D98C3A", "Other asset" = "#B5B5B5"), name = NULL) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
+  labs(x = NULL, y = "Coverage") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+::: {.reader-note}
+**How to read the plot.** Each panel is one way to split the budget. Bars show how much of each asset is protected. The orange bar is the asset the crew would attack if it reads our defences perfectly.
+
+**What the plot tells you.** Risk-ranked piles protection onto two assets and leaves identity at the floor, which is where the crew goes. Proportional and uniform spread money out but still leave identity as the best target. Only the textbook plan changes the crew's destination.
+:::
+
+```{r}
+#| label: tbl-strategy-summary
+#| tbl-cap: "Crew target and our expected loss under each strategy, assuming a perfectly rational crew."
+sm |>
+  filter(strategy %in% four) |>
+  transmute(Strategy = STRAT_LABELS[strategy], Target = ASSET_SHORT[target], Loss = loss_rational) |>
+  gt() |>
+  cols_label(Target = "Crew target", Loss = "Expected loss ($M)") |>
+  fmt_number(columns = Loss, decimals = 1) |>
+  gt_se()
+```
+
+::: {.reader-note}
+**How to read the table.** Each row is a strategy. The second column is the asset the crew attacks if it picks its best option. The third is our average loss from that attack.
+
+**What the table tells you.** Risk-ranking has the highest loss. The textbook plan looks far better, but this table assumes we know exactly what the crew wants. Page 4 tests that assumption.
+:::
+
+## Interpretation
+
+Risk-ranked funds the platform and pipeline and leaves identity at the floor. The crew sees this and goes to identity, for an expected loss of `r fmt_m(loss_of("risk_ranked"))`.
+
+The textbook equilibrium does something cleverer. It sets coverage so that the crew earns the same on `r n_tie` of the six assets. It lets the attack fall on `r nm(target_of("textbook"))`, a low-impact target, and cuts expected loss to `r fmt_m(loss_of("textbook"))`.
+
+The trick has a price. The crew values the pipeline too little to bother, so the textbook plan holds the pipeline at `r fmt_pct(cov_of("textbook", "PIPE"))`, the floor. The pipeline is our largest single loss.
+
+This is the trap: the plan only works if we've read the crew perfectly.
+
+## Alignment check
+
+What if the crew wanted what we fear most? We reran the comparison with crew values proportional to our losses. The textbook plan then costs `r fmt_m(al$loss_rational[al$strategy == "textbook"])`, with the crew attacking `r nm(al$target[al$strategy == "textbook"])`. Risk-ranked costs `r fmt_m(al$loss_rational[al$strategy == "risk_ranked"])`, with the crew attacking `r nm(al$target[al$strategy == "risk_ranked"])`.
+
+The gap does not close. Concentration itself is the problem, not just misreading the attacker: risk-ranked spends heavily on a few assets and leaves the rest cheap to hit, whatever the crew wants.

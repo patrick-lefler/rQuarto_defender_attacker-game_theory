@@ -1,0 +1,44 @@
+# Every parameter is an ASSUMPTION (illustrative, synthetic) unless a source is given.
+# Money in $M. Loss figures are expected loss per targeted ransomware campaign (one campaign per year).
+seed:
+  value: 20261103
+  status: assumption (reproducibility seed for all random streams)
+budget_base:
+  value: 9.0
+  status: assumption (allocable security budget, $M per year)
+coverage_floor:
+  value: 0.25
+  status: assumption (hygiene baseline on every asset; cost included in budget)
+  range: [0.0, 0.5]
+def_covered_share:
+  value: 0.10
+  status: assumption (defender loss when an attack is stopped, share of full loss)
+  range: [0.0, 0.3]
+lambda_robust:
+  value: 2.0
+  status: assumption (QRE rationality; justified on page 4 by the misestimation sweep)
+  range: [0.25, 10]
+lambda_grid:
+  value: [0.25, 0.5, 1, 2, 3, 5, 10]
+  status: assumption (grid for the QRE sweep)
+misest_sigma:
+  value: 0.35
+  status: assumption (lognormal sigma of multiplicative error on crew success payoffs)
+  range: [0.1, 0.7]
+n_mc:
+  value: 3000
+  status: assumption (Monte Carlo draws)
+budget_grid:
+  from: 5.0
+  to: 20.0
+  by: 0.5
+  status: assumption (frontier and slider grid; minimum feasible budget is 4.875)
+n_starts:
+  value: 20
+  status: assumption (multistart count for robust optimizer)
+tol:
+  value: 1.0e-7
+  status: assumption (tie tolerance for attacker best response)
+loss_lognormal_sigma:
+  value: 0.8
+  status: assumption (display-only lognormal sigma for asset loss L, which is treated as the mean)

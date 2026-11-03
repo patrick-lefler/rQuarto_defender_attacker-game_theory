@@ -1,0 +1,230 @@
+---
+title: "Misreading the Attacker"
+subtitle: "Where Will the Attacker Strike? How each strategy copes when our read of the crew is wrong"
+---
+
+```{r}
+#| include: false
+source("R/00_params.R"); source("R/01_utils.R"); source("R/90_theme.R")
+library(dplyr); library(ggplot2); library(gt)
+assets <- load_assets()
+base <- read_result("strategies_base")$summary
+ms <- read_result("misest_summary")
+draws <- read_result("misest_draws")
+sweep <- read_result("qre_sweep")
+lam <- read_result("lambda_choice")
+fr <- read_result("frontier")$frontier
+slider_data <- read_result("slider_data")
+mean_of <- \(s) ms$mean[ms$strategy == s]
+p95_of <- \(s) ms$p95[ms$strategy == s]
+rat_of <- \(s) base$loss_rational[base$strategy == s]
+at_b <- \(s, b, col) fr[[col]][fr$strategy == s & fr$budget == b]
+lam_of <- \(l) lam$mc_mean[lam$lambda == l]
+n_tie <- length(read_result("strategies_base")$textbook_attack_set)
+pipe_loss <- assets$L[assets$asset_id == "PIPE"]
+sweep_gap <- sweep |> mutate(gap = expected_loss - min(expected_loss), .by = lambda) |> filter(strategy == "robust")
+lam_from <- min(sweep_gap$lambda[sweep_gap$gap < 1e-6])
+fr_gap <- fr |> mutate(gap = mc_mean - min(mc_mean), .by = budget) |> filter(strategy == "robust", gap > 1e-6)
+exc <- fr_gap$budget
+b0 <- BUDGET_BASE; b1 <- BUDGET_BASE + 1
+gain <- \(s) at_b(s, b0, "mc_mean") - at_b(s, b1, "mc_mean")
+```
+
+*All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.*
+
+## Why the textbook answer is fragile
+
+The textbook equilibrium works by making the crew exactly indifferent across `r n_tie` targets. That razor's edge is what makes the plan efficient, and also what makes it brittle: when the crew's real payoffs differ from our estimates, the crew steps off the edge toward the target we left weakest.
+
+## Misjudged payoffs
+
+We drew `r format(N_MC, big.mark = ",")` versions of the crew. In each, every success payoff is multiplied by a random error (lognormal, sigma = `r MISEST_SIGMA`). Every strategy faces the same draws.
+
+```{r}
+#| label: fig-misest-ridges
+#| fig-cap: "Distribution of our loss when the crew's payoffs differ from our estimate. Diamonds mark the 95th percentile."
+#| fig-alt: "Ridgeline histograms of loss for five strategies, ordered by mean loss. The robust strategy has most of its mass below 15 million dollars. The textbook strategy has a long right tail reaching about 46 million dollars."
+ord <- ms |> arrange(mean) |> pull(strategy)
+lv <- rev(ord)
+d <- draws |> mutate(strategy = factor(strategy, levels = lv))
+p95 <- ms |> mutate(strategy = factor(strategy, levels = lv))
+ggplot(d, aes(loss, strategy, fill = strategy)) +
+  ggridges::geom_density_ridges(
+    stat = "binline", binwidth = 1.5, scale = 0.5, draw_baseline = FALSE,
+    alpha = 0.85, color = "white", linewidth = 0.3
+  ) +
+  geom_point(data = p95, aes(p95, strategy), shape = 18, size = 4.5, inherit.aes = FALSE, color = "black",
+             position = position_nudge(y = 0.03)) +
+  scale_fill_manual(values = STRAT_COLS, guide = "none") +
+  scale_y_discrete(labels = STRAT_LABELS) +
+  scale_x_continuous(labels = scales::label_dollar(suffix = "M")) +
+  labs(x = "Loss per campaign", y = NULL, title = "The textbook equilibrium has the longest tail")
+```
+
+::: {.reader-note}
+**How to read the plot.** Each row is a strategy, ordered from lowest average loss (top) to highest. Taller bars mean the loss in that range is more common across our simulated crews. The black diamond marks the loss that only 1 in 20 crews exceeds.
+
+**What the plot tells you.** The robust strategy keeps most outcomes low and its diamond near the left. The textbook equilibrium is cheap when we guess right and very costly when we do not, because the starved pipeline is a `r fmt_m(pipe_loss, 0)` asset.
+:::
+
+```{r}
+#| label: tbl-misest
+#| tbl-cap: "Loss statistics when the crew's payoffs are misjudged, by strategy."
+ms |>
+  arrange(mean) |>
+  transmute(Strategy = STRAT_LABELS[strategy], mean, p50, p95, p99,
+            Hit = sprintf("%s (%s)", ASSET_SHORT[top_target], fmt_pct(top_share))) |>
+  gt() |>
+  cols_label(mean = "Mean", p50 = "Median", p95 = "95th pct.", p99 = "99th pct.", Hit = "Most-hit asset") |>
+  tab_spanner("Loss ($M)", columns = c(mean, p50, p95, p99)) |>
+  fmt_number(columns = c(mean, p50, p95, p99), decimals = 1) |>
+  gt_se()
+```
+
+::: {.reader-note}
+**How to read the table.** Each row is a strategy, sorted by average loss. The loss columns show the average, the middle case, and the bad cases that 1 in 20 and 1 in 100 simulated crews exceed. The last column shows the asset attacked most often and the share of crews that attack it.
+
+**What the table tells you.** The robust strategy has the lowest average and the smallest bad cases. The textbook equilibrium has the worst average, and its 95th percentile is `r sprintf('%.1f', p95_of('textbook') / p95_of('robust'))` times the robust figure. The crew's favourite target also differs across strategies.
+:::
+
+::: {.callout-tip title="Value of better threat intelligence"}
+Perfect intelligence would save the robust strategy `r fmt_m(mean_of("robust") - rat_of("robust"))` of expected loss, and the textbook strategy `r fmt_m(mean_of("textbook") - rat_of("textbook"))`. These gaps measure how much each strategy depends on accurate intelligence. Textbook depends on it far more.
+:::
+
+## The robust equilibrium
+
+The robust strategy assumes the crew *mostly*, but not always, picks the best target. It gives each target a chance of being hit that rises with how attractive it is to the crew, then minimizes our expected loss against those chances. A rationality parameter, $\lambda$, controls how sharp the crew is.
+
+We set $\lambda =$ `r LAMBDA_ROBUST`. Optimizing at 1 or 2 gives the lowest average loss under misestimation: `r fmt_m(lam_of(1), 2)` at 1, `r fmt_m(lam_of(2), 2)` at 2, `r fmt_m(lam_of(3), 2)` at 3 and `r fmt_m(lam_of(5), 2)` at 5.
+
+::: {.callout-note collapse="true" title="The math"}
+The crew attacks target $t$ with probability
+
+$$q_t(c) = \frac{\exp(\lambda U_a(t,c))}{\sum_s \exp(\lambda U_a(s,c))}.$$
+
+We minimize $f(c) = \sum_t q_t(c)\,\ell_t(c)$ over feasible coverage, with $\ell_t$ our loss on target $t$. The gradient is analytic and checked against finite differences. A multistart SLSQP search handles the nonconvexity.
+:::
+
+## Noisy attackers
+
+```{r}
+#| label: fig-qre-sweep
+#| fig-cap: "Expected loss against a noisy crew as the crew becomes sharper (higher lambda). Strategies are held fixed."
+#| fig-alt: "Line chart of expected loss against lambda on a log axis for five strategies. The robust strategy is lowest from lambda of 1 upward. The textbook equilibrium is highest at the lower values."
+sweep |>
+  mutate(strategy = factor(strategy, levels = STRAT_ORDER)) |>
+  ggplot(aes(lambda, expected_loss, color = strategy, linetype = strategy)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 1.8) +
+  scale_x_log10(breaks = LAMBDA_GRID, labels = LAMBDA_GRID) +
+  scale_color_manual(values = STRAT_COLS, labels = STRAT_LABELS, name = NULL) +
+  scale_linetype_manual(values = STRAT_LTY, labels = STRAT_LABELS, name = NULL) +
+  scale_y_continuous(labels = scales::label_dollar(suffix = "M")) +
+  labs(x = "Crew sharpness (lambda, log scale)", y = "Expected loss",
+       title = "Robust wins unless the crew is nearly random") +
+  guides(color = guide_legend(nrow = 2))
+```
+
+::: {.reader-note}
+**How to read the plot.** The horizontal axis shows how sharp the crew is: low values mean it picks targets almost at random, high values mean it always picks its best one. Each line is a strategy whose coverage is fixed. The vertical axis is our expected loss.
+
+**What the plot tells you.** The robust strategy has the lowest loss once the crew is moderately sharp (`r LAMBDA_ROBUST` is our base case; robust leads from `r lam_from` upward). For a nearly random crew, simpler plans do slightly better. The textbook equilibrium is worse than robust at every sharpness.
+:::
+
+## The budget frontier
+
+```{r}
+#| label: fig-frontier
+#| fig-cap: "Expected loss when we misjudge the crew, by budget. The vertical line marks the base budget."
+#| fig-alt: "Line chart of mean loss against budget from 5 to 20 million dollars for five strategies. The robust strategy lies lowest or tied at nearly every budget. A vertical line marks the 9 million dollar base budget."
+fr |>
+  mutate(strategy = factor(strategy, levels = STRAT_ORDER)) |>
+  ggplot(aes(budget, mc_mean, color = strategy, linetype = strategy)) +
+  geom_vline(xintercept = BUDGET_BASE, color = "gray60", linetype = "dotted") +
+  geom_line(linewidth = 1) +
+  scale_color_manual(values = STRAT_COLS, labels = STRAT_LABELS, name = NULL) +
+  scale_linetype_manual(values = STRAT_LTY, labels = STRAT_LABELS, name = NULL) +
+  scale_x_continuous(labels = scales::label_dollar(suffix = "M")) +
+  scale_y_continuous(labels = scales::label_dollar(suffix = "M")) +
+  labs(x = "Allocable budget", y = "Expected loss if we misjudge the crew",
+       title = "Robust stays ahead as the budget grows") +
+  guides(color = guide_legend(nrow = 2))
+```
+
+::: {.reader-note}
+**How to read the plot.** Each line shows how average loss falls as the budget grows, for one strategy, when we misjudge the crew. Lower is better. The dotted vertical line is our base budget.
+
+**What the plot tells you.** Robust has the lowest loss at nearly every budget. The exception is `r paste(fmt_m(exc), collapse = ", ")`, just above the minimum feasible budget, where a baseline is slightly better. Some baselines get worse as the budget rises, because new coverage can push the crew toward a weaker asset. At the largest budgets the lines flatten.
+:::
+
+Moving from `r fmt_m(b0)` to `r fmt_m(b1)` lowers the expected loss from misjudging the crew by `r fmt_m(gain("robust"), 2)` under robust and `r fmt_m(gain("risk_ranked"), 2)` under risk-ranked. Robust still leads at `r fmt_m(b1)`: `r fmt_m(at_b("robust", b1, "mc_mean"))` against `r fmt_m(at_b("risk_ranked", b1, "mc_mean"))`. Across the budget grid from `r fmt_m(min(BUDGET_GRID))` to `r fmt_m(max(BUDGET_GRID), 0)`, robust is lowest or tied at every budget except `r paste(fmt_m(exc), collapse = ", ")`.
+
+Try it: move the slider to see how coverage and the crew's likely target change.
+
+```{r}
+#| echo: false
+sd_out <- slider_data |>
+  mutate(
+    asset = ASSET_SHORT[asset_id],
+    strategy_label = STRAT_LABELS[strategy],
+    target_label = ASSET_SHORT[target_rational]
+  )
+ojs_define(slider = sd_out)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+sliderRows = transpose(slider)
+```
+
+```{ojs}
+//| echo: false
+viewof budget = Inputs.range([5, 20], {step: 0.5, value: 9, label: "Allocable budget ($M)"})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+now = sliderRows.filter(d => Math.abs(d.budget - budget) < 1e-9)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+rr = now.find(d => d.strategy === "risk_ranked")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+rb = now.find(d => d.strategy === "robust")
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 100, marginRight: 30, marginBottom: 45,
+  height: 340,
+  x: {domain: [0, 1], label: "Coverage", labelAnchor: "center", tickFormat: d => (d * 100) + "%"},
+  fy: {domain: ["Platform", "Pipeline", "Client data", "Identity", "Corporate IT", "Vendor"], label: null},
+  y: {axis: null, domain: ["Risk-ranked", "Robust equilibrium"]},
+  color: {domain: ["Risk-ranked", "Robust equilibrium"], range: ["#4D4D4D", "#0166CC"], legend: true},
+  style: {fontFamily: "inherit", fontSize: "13px"},
+  marks: [
+    Plot.barX(now, {x: "coverage", y: "strategy_label", fy: "asset", fill: "strategy_label"}),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+html`<div class="slider-sentence">At <b>$${budget.toFixed(1)}M</b>, the crew's best target is <b>${rr.target_label}</b> under risk-ranked and <b>${rb.target_label}</b> under robust. Expected loss if we misjudge the crew: <b>$${rr.mc_mean.toFixed(1)}M</b> against <b>$${rb.mc_mean.toFixed(1)}M</b>.</div>`
+```
+
+::: {.reader-note}
+**How to read the plot.** Drag the slider to choose a budget. Each group of bars is an asset, with the grey bar for risk-ranked coverage and the blue bar for the robust strategy. The sentence under the chart states the crew's likely target and our expected loss under each approach.
+
+**What the plot tells you.** As the budget changes, risk-ranked keeps funding the same few assets, while the robust strategy spreads protection toward the places a crew is likely to hit. The sentence shows what that difference costs us.
+:::

@@ -10,4 +10,4 @@ renv/staging/
 **/*.quarto_ipynb
 
 docs/
-Defender-Attacker-Game-Project-Outline.html
+Defender-Attacker-Game-Project-Outline.html_freeze/

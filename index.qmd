@@ -1,0 +1,87 @@
+---
+title: "Where Will the Attacker Strike?"
+subtitle: "Game-Theoretic Allocation of a Security Budget: Executive Summary"
+---
+
+```{r}
+#| include: false
+source("R/00_params.R"); source("R/01_utils.R"); source("R/90_theme.R")
+library(dplyr); library(ggplot2)
+base <- read_result("strategies_base")$summary
+ms <- read_result("misest_summary")
+mean_of <- \(s) ms$mean[ms$strategy == s]
+p95_of <- \(s) ms$p95[ms$strategy == s]
+rat_of <- \(s) base$loss_rational[base$strategy == s]
+tgt_of <- \(s) base$target[base$strategy == s]
+cut_mean <- 1 - mean_of("robust") / mean_of("risk_ranked")
+cut_tail <- 1 - p95_of("robust") / p95_of("risk_ranked")
+```
+
+*All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative and synthetic.*
+
+## The problem
+
+Most security budgets are ranked: list the risks, fund from the top. That treats the attacker as weather. Ransomware crews adapt. They look at what we defend and go where the payoff is best for them.
+
+We study a 500-person fintech firm whose cloud platform is critical infrastructure for its clients. It splits `r fmt_m(BUDGET_BASE)` a year across six assets, and a ransomware crew picks one to hit. We compare five ways to split the money.
+
+## Three findings
+
+1. **Risk-ranking invites the attack.** Funding the top risks first leaves identity at baseline coverage, and the crew goes there. Expected loss is `r fmt_m(mean_of("risk_ranked"), 0)`, against `r fmt_m(mean_of("robust"), 0)` for the robust allocation.
+2. **The textbook equilibrium looks best on paper and is worst under uncertainty.** If we read the crew perfectly, it cuts loss to `r fmt_m(rat_of("textbook"))`. If we misjudge the crew modestly, the 95th percentile loss is `r fmt_m(p95_of("textbook"), 0)`.
+3. **The robust allocation anticipates the attacker without betting on a perfect read.** It cuts expected loss by `r fmt_pct(cut_mean)` and the tail by `r fmt_pct(cut_tail)` against risk-ranked.
+
+```{r}
+#| label: fig-hero
+#| fig-cap: "Expected loss if we read the crew perfectly and if we misjudge it, by strategy. Whiskers show the 95th percentile."
+#| fig-alt: "Horizontal paired bars for five strategies, ordered by loss under misjudgment. The robust strategy has the lowest misjudged loss at about 9 million dollars. The textbook equilibrium has the lowest loss under perfect reading, 4.9 million, but the highest under misjudgment with a 95th percentile of 46 million."
+#| fig-height: 5
+ord <- ms |> arrange(mean) |> pull(strategy)
+d <- ms |>
+  select(strategy, mean, p95) |>
+  left_join(base |> select(strategy, loss_rational), by = "strategy") |>
+  tidyr::pivot_longer(c(loss_rational, mean), names_to = "case", values_to = "loss") |>
+  mutate(
+    case = factor(case, levels = c("mean", "loss_rational"),
+                  labels = c("If we misjudge the crew", "If we read the crew perfectly")),
+    strategy = factor(strategy, levels = rev(ord)),
+    p95 = ifelse(case == "If we misjudge the crew", p95, NA_real_),
+    lab = ifelse(strategy == "robust", "Robust", "")
+  )
+ggplot(d, aes(loss, strategy, fill = strategy, alpha = case, group = case)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.75) +
+  geom_errorbar(
+    aes(xmin = loss, xmax = p95), width = 0.25, alpha = 1, color = "black",
+    position = position_dodge(width = 0.8), na.rm = TRUE
+  ) +
+  geom_text(aes(x = ifelse(is.na(p95), loss, p95), label = fmt_m(loss)),
+            position = position_dodge(width = 0.8), hjust = -0.15, size = 3.4,
+            color = "black", alpha = 1) +
+  scale_fill_manual(values = STRAT_COLS, guide = "none") +
+  scale_alpha_manual(values = c("If we misjudge the crew" = 1, "If we read the crew perfectly" = 0.45), name = NULL,
+                     guide = guide_legend(override.aes = list(fill = "gray30"), reverse = TRUE)) +
+  scale_y_discrete(labels = STRAT_LABELS) +
+  scale_x_continuous(labels = scales::label_dollar(suffix = "M"), expand = expansion(mult = c(0, 0.1))) +
+  labs(x = "Expected loss per campaign", y = NULL,
+       title = "Robust wins when we are wrong about the crew")
+```
+
+::: {.reader-note}
+**How to read the plot.** Each strategy has two bars. The lighter bar is our loss if we read the crew perfectly. The darker bar is our average loss if we misjudge the crew, and the black line reaches the 95th percentile, which only 1 in 20 misjudgments exceeds. Strategies run from lowest to highest misjudged loss.
+
+**What the plot tells you.** The textbook equilibrium has the lowest light bar and the highest dark bar: it is cheapest on paper and costliest when wrong. The robust strategy gives up some of the paper saving and has the lowest average and the shortest line.
+:::
+
+::: {.callout-tip title="Questions to ask your CISO"}
+1. Where does our current plan push an attacker?
+2. Which high-impact assets are we under-protecting because we assume attackers don't want them?
+3. How would our allocation perform if our threat intelligence is wrong?
+4. What does the next $1M buy under each approach?
+:::
+
+## How to read this site
+
+- **The Game:** a two-asset example shows why defending the biggest asset can fail.
+- **Allocation:** the firm, the six assets and four ways to split the budget.
+- **Robustness:** what happens when we misjudge the crew, and the robust strategy.
+- **Governance:** the assumptions, the limits and the automated checks.
