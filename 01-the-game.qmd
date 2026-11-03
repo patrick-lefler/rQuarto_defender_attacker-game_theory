@@ -1,0 +1,108 @@
+---
+title: "The Game"
+subtitle: "Where Will the Attacker Strike? Why defending the biggest asset can fail"
+---
+
+```{r}
+#| include: false
+source("R/00_params.R"); source("R/01_utils.R"); source("R/90_theme.R")
+library(dplyr); library(ggplot2); library(gt)
+two <- read_result("two_asset")
+eq <- two$equilibrium
+pl <- two$plans
+a2 <- two$assets2
+```
+
+*All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.*
+
+## Why "defend the most valuable asset" fails
+
+The usual budget logic ranks assets by expected loss and funds the top of the list. That logic treats the attacker as weather: a hazard with fixed odds.
+
+A ransomware crew is not weather. It looks at what we have protected and picks the target that pays best for *it*. Every dollar we move changes where the crew goes.
+
+So a plan can look careful and still invite the attack. If we protect the crown jewel fully, the crew simply goes next door, and the asset we under-protected takes the hit.
+
+## A two-asset example
+
+Take two assets. The production platform (PLAT) would cost us `r fmt_m(a2$L[1], 0)` if breached. The identity provider (IDP) would cost `r fmt_m(a2$L[2], 0)`. The crew values PLAT at `r fmt_m(a2$V[1], 0)` and IDP at `r fmt_m(a2$V[2], 0)`, so it slightly prefers IDP. We have one unit of coverage to split between them.
+
+We compare three plans: protect the crown jewel completely, split coverage in proportion to impact, or play the game and equalize what the crew can gain from each target.
+
+```{r}
+#| label: fig-two-asset
+#| fig-cap: "The crew's payoff on each target as coverage shifts from IDP to PLAT. The equilibrium sits where the lines cross."
+#| fig-alt: "Line chart of the crew's payoff on PLAT and on IDP against coverage on PLAT. The lines cross near 0.45, marked as the equilibrium with a defender loss of 9.1 million dollars. Two other plans are marked with higher losses."
+g <- two$grid |>
+  tidyr::pivot_longer(c(PLAT, IDP), names_to = "target", values_to = "payoff")
+plans <- tibble::tibble(
+  plan = c("Crown jewel", "Impact-proportional", "Equilibrium"),
+  c_PLAT = c(pl$crown_jewel$coverage[["PLAT"]], pl$impact_proportional$coverage[["PLAT"]], pl$equilibrium$coverage[["PLAT"]]),
+  loss = c(pl$crown_jewel$loss, pl$impact_proportional$loss, pl$equilibrium$loss)
+) |>
+  mutate(
+    payoff = pmax(
+      c_PLAT * a2$A_c[1] + (1 - c_PLAT) * a2$V[1],
+      (1 - c_PLAT) * a2$A_c[2] + c_PLAT * a2$V[2]
+    ),
+    label = paste0(plan, "\nloss ", fmt_m(loss))
+  )
+ggplot(g, aes(c_PLAT, payoff)) +
+  geom_line(aes(linetype = target, color = target), linewidth = 1) +
+  geom_point(data = plans, size = 3) +
+  ggrepel::geom_label_repel(
+    data = plans, aes(label = label), size = 3.3, min.segment.length = 0,
+    nudge_y = c(-2.3, 0.9, -2.8), nudge_x = c(-0.08, -0.02, 0.1), label.size = 0.2
+  ) +
+  scale_color_manual(values = c(PLAT = "#4D4D4D", IDP = "#7A3E9D"), name = "Crew payoff on") +
+  scale_linetype_manual(values = c(PLAT = "solid", IDP = "dashed"), name = "Crew payoff on") +
+  scale_x_continuous(labels = scales::percent) +
+  labs(x = "Coverage on PLAT (remainder goes to IDP)", y = "Crew payoff ($M)",
+       title = "The equilibrium makes the crew indifferent")
+```
+
+::: {.reader-note}
+**How to read the plot.** The horizontal axis shows how much of our one unit of protection goes to the platform; the rest goes to identity. Each line is what the crew would earn attacking that target, and it goes wherever its line is higher. Dots mark three plans.
+
+**What the plot tells you.** Protecting the crown jewel completely leaves identity open, so the crew goes there and we lose most. The equilibrium sits where the lines cross: the crew gains the same either way, and we pick the point that costs us least. Values are made up, so read the shape.
+:::
+
+```{r}
+#| label: tbl-two-asset
+#| tbl-cap: "Three plans for the two-asset example: coverage, the crew's chosen target, and our expected loss."
+tibble::tibble(
+  Plan = c("Protect the crown jewel", "Impact-proportional", "Equilibrium"),
+  `Coverage on PLAT` = c(pl$crown_jewel$coverage[["PLAT"]], pl$impact_proportional$coverage[["PLAT"]], pl$equilibrium$coverage[["PLAT"]]),
+  `Coverage on IDP` = c(pl$crown_jewel$coverage[["IDP"]], pl$impact_proportional$coverage[["IDP"]], pl$equilibrium$coverage[["IDP"]]),
+  `Crew target` = c(pl$crown_jewel$target, pl$impact_proportional$target, pl$equilibrium$target),
+  `Defender loss ($M)` = c(pl$crown_jewel$loss, pl$impact_proportional$loss, pl$equilibrium$loss)
+) |>
+  gt() |>
+  fmt_number(columns = starts_with("Coverage"), decimals = 3) |>
+  fmt_number(columns = `Defender loss ($M)`, decimals = 1) |>
+  gt_se()
+```
+
+::: {.reader-note}
+**How to read the table.** Each row is one way to split our protection between the two assets. The columns show how much goes to each asset, which asset the crew then attacks, and what the attack costs us on average.
+
+**What the table tells you.** In every plan the crew attacks the identity provider, because we cannot make the platform and identity equally unattractive without moving coverage toward identity. The plan that anticipates this loses about half as much as the crown-jewel plan. Good protection means steering the crew, not only guarding the biggest asset.
+:::
+
+## The setup in one paragraph
+
+We choose how much coverage each asset gets. The crew sees our choice and attacks the target with the best payoff for it. We pick the coverage that minimizes our loss given that response. This is a Stackelberg game: we move first, the crew moves second. When the crew is indifferent between targets, we assume it breaks the tie in our favour.
+
+::: {.callout-note collapse="true" title="The math"}
+Coverage $c_t \in [\text{floor},\, c^{max}_t]$ on target $t$ costs $k_t c_t$, with $\sum_t k_t c_t \le B$. Payoffs are
+
+$$U_d(t,c) = c_t U_d^c(t) + (1-c_t)U_d^u(t), \qquad U_a(t,c) = c_t A^c_t + (1-c_t)V_t.$$
+
+The crew picks $t^* = \arg\max_t U_a(t,c)$. The textbook equilibrium solves one linear program per candidate target and keeps the best for us.
+:::
+
+## Three assumptions
+
+1. **The crew observes our coverage.** It probes before it strikes.
+2. **Our commitment is credible.** We do not change the allocation after the crew chooses.
+3. **We can estimate the crew's payoffs.** This is the weak point. Page 4 relaxes it.
