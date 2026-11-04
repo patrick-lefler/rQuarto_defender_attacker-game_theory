@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Allocating the Budget – Where Will the Attacker Strike?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./03-robustness.html" rel="next">
+<link href="./01-the-game.html" rel="prev">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-9a19a6dc4b25886ecdc4cfc46d632d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-allocation.html">Allocation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Where Will the Attacker Strike?</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-the-game.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Game</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-allocation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Allocation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-robustness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robustness</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-governance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Governance</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-firm" id="toc-the-firm" class="nav-link active" data-scroll-target="#the-firm">The firm</a></li>
+  <li><a href="#where-we-and-the-crew-disagree" id="toc-where-we-and-the-crew-disagree" class="nav-link" data-scroll-target="#where-we-and-the-crew-disagree">Where we and the crew disagree</a></li>
+  <li><a href="#four-strategies-at-the-base-budget" id="toc-four-strategies-at-the-base-budget" class="nav-link" data-scroll-target="#four-strategies-at-the-base-budget">Four strategies at the base budget</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#alignment-check" id="toc-alignment-check" class="nav-link" data-scroll-target="#alignment-check">Alignment check</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Allocating the Budget</h1>
+<p class="subtitle lead">Where Will the Attacker Strike? Four ways to split a security budget</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.</em></p>
+<section id="the-firm" class="level2">
+<h2 class="anchored" data-anchor-id="the-firm">The firm</h2>
+<p>The firm has 500 staff. Its cloud platform is critical infrastructure for its bank and broker clients. It has $9.0M a year to allocate across six assets. That budget includes a hygiene floor: every asset keeps at least 25% coverage, because compliance demands it.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">log</span>(assets<span class="sc">$</span>L) <span class="sc">-</span> LOSS_SIGMA<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>assets <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Asset =</span> ASSET_SHORT[asset_id],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">exp</span>(mu),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">lo =</span> <span class="fu">exp</span>(mu <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> LOSS_SIGMA),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">hi =</span> <span class="fu">exp</span>(mu <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> LOSS_SIGMA),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f to %.1f"</span>, lo, hi)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Asset, L, median, ci, V, k, c_max, p_heat) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="st">"Defender loss ($M)"</span>, <span class="at">columns =</span> <span class="fu">c</span>(L, median, ci)) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">L =</span> <span class="st">"Mean"</span>, <span class="at">median =</span> <span class="st">"Median"</span>, <span class="at">ci =</span> <span class="st">"90% interval"</span>, <span class="at">V =</span> <span class="st">"Crew value ($M)"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">k =</span> <span class="st">"Cost to cover ($M)"</span>, <span class="at">c_max =</span> <span class="st">"Coverage cap"</span>, <span class="at">p_heat =</span> <span class="st">"Heat-map likelihood"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(L, median, V, k), <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(c_max, p_heat), <span class="at">decimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="st">"Illustrative values. Loss is treated as the mean of a lognormal with sigma = 0.8; median and interval are shown for context only."</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-assets" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-assets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: The six assets and their parameters. Illustrative values.
+</figcaption>
+<div aria-describedby="tbl-assets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="rytqqqlome" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rytqqqlome table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rytqqqlome thead, #rytqqqlome tbody, #rytqqqlome tfoot, #rytqqqlome tr, #rytqqqlome td, #rytqqqlome th {
+  border-style: none;
+}
+
+#rytqqqlome p {
+  margin: 0;
+  padding: 0;
+}
+
+#rytqqqlome .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rytqqqlome .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rytqqqlome .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rytqqqlome .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_col_heading {
+  color: #333333;
+  background-color: #F2F2F2;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rytqqqlome .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #F2F2F2;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rytqqqlome .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rytqqqlome .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rytqqqlome .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rytqqqlome .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rytqqqlome .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rytqqqlome .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rytqqqlome .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rytqqqlome .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rytqqqlome .gt_row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rytqqqlome .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytqqqlome .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rytqqqlome .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rytqqqlome .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rytqqqlome .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytqqqlome .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rytqqqlome .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytqqqlome .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rytqqqlome .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytqqqlome .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rytqqqlome .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytqqqlome .gt_left {
+  text-align: left;
+}
+
+#rytqqqlome .gt_center {
+  text-align: center;
+}
+
+#rytqqqlome .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rytqqqlome .gt_font_normal {
+  font-weight: normal;
+}
+
+#rytqqqlome .gt_font_bold {
+  font-weight: bold;
+}
+
+#rytqqqlome .gt_font_italic {
+  font-style: italic;
+}
+
+#rytqqqlome .gt_super {
+  font-size: 65%;
+}
+
+#rytqqqlome .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rytqqqlome .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rytqqqlome .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rytqqqlome .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rytqqqlome .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rytqqqlome .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rytqqqlome .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rytqqqlome .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rytqqqlome div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="Asset" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Asset</th>
+<th colspan="3" id="Defender loss ($M)" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+Defender loss ($M)
+</div></th>
+<th rowspan="2" id="V" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Crew value ($M)</th>
+<th rowspan="2" id="k" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Cost to cover ($M)</th>
+<th rowspan="2" id="c_max" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Coverage cap</th>
+<th rowspan="2" id="p_heat" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Heat-map likelihood</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="L" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean</th>
+<th id="median" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Median</th>
+<th id="ci" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">90% interval</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Asset">Platform</td>
+<td class="gt_row gt_right" headers="L">45.0</td>
+<td class="gt_row gt_right" headers="median">32.7</td>
+<td class="gt_row gt_left" headers="ci">8.8 to 121.8</td>
+<td class="gt_row gt_right" headers="V">6.0</td>
+<td class="gt_row gt_right" headers="k">4.0</td>
+<td class="gt_row gt_right" headers="c_max">0.90</td>
+<td class="gt_row gt_right" headers="p_heat">0.30</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Asset">Pipeline</td>
+<td class="gt_row gt_right" headers="L">60.0</td>
+<td class="gt_row gt_right" headers="median">43.6</td>
+<td class="gt_row gt_left" headers="ci">11.7 to 162.4</td>
+<td class="gt_row gt_right" headers="V">2.5</td>
+<td class="gt_row gt_right" headers="k">3.0</td>
+<td class="gt_row gt_right" headers="c_max">0.90</td>
+<td class="gt_row gt_right" headers="p_heat">0.15</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Asset">Client data</td>
+<td class="gt_row gt_right" headers="L">30.0</td>
+<td class="gt_row gt_right" headers="median">21.8</td>
+<td class="gt_row gt_left" headers="ci">5.8 to 81.2</td>
+<td class="gt_row gt_right" headers="V">5.0</td>
+<td class="gt_row gt_right" headers="k">2.5</td>
+<td class="gt_row gt_right" headers="c_max">0.90</td>
+<td class="gt_row gt_right" headers="p_heat">0.30</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Asset">Identity</td>
+<td class="gt_row gt_right" headers="L">18.0</td>
+<td class="gt_row gt_right" headers="median">13.1</td>
+<td class="gt_row gt_left" headers="ci">3.5 to 48.7</td>
+<td class="gt_row gt_right" headers="V">7.0</td>
+<td class="gt_row gt_right" headers="k">2.0</td>
+<td class="gt_row gt_right" headers="c_max">0.90</td>
+<td class="gt_row gt_right" headers="p_heat">0.25</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Asset">Corporate IT</td>
+<td class="gt_row gt_right" headers="L">10.0</td>
+<td class="gt_row gt_right" headers="median">7.3</td>
+<td class="gt_row gt_left" headers="ci">1.9 to 27.1</td>
+<td class="gt_row gt_right" headers="V">5.5</td>
+<td class="gt_row gt_right" headers="k">3.0</td>
+<td class="gt_row gt_right" headers="c_max">0.85</td>
+<td class="gt_row gt_right" headers="p_heat">0.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Asset">Vendor</td>
+<td class="gt_row gt_right" headers="L">20.0</td>
+<td class="gt_row gt_right" headers="median">14.5</td>
+<td class="gt_row gt_left" headers="ci">3.9 to 54.1</td>
+<td class="gt_row gt_right" headers="V">4.0</td>
+<td class="gt_row gt_right" headers="k">5.0</td>
+<td class="gt_row gt_right" headers="c_max">0.70</td>
+<td class="gt_row gt_right" headers="p_heat">0.20</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_sourcenotes odd">
+<td colspan="8" class="gt_sourcenote">Illustrative values. Loss is treated as the mean of a lognormal with sigma = 0.8; median and interval are shown for context only.</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="reader-note">
+<p><strong>How to read the table.</strong> Each row is an asset. The first block is what a successful attack would cost us. “Crew value” is what the crew gains from a successful attack. “Cost to cover” is the price of full coverage, and the cap is the most protection we can reach. The last column feeds two of the strategies.</p>
+<p><strong>What the table tells you.</strong> Our biggest loss (the pipeline) is among the crew’s least valued targets, while identity is the crew’s favourite and costs us far less. The wide 90% intervals warn that a typical loss can differ greatly from the average.</p>
+</div>
+</section>
+<section id="where-we-and-the-crew-disagree" class="level2">
+<h2 class="anchored" data-anchor-id="where-we-and-the-crew-disagree">Where we and the crew disagree</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>assets <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_L =</span> <span class="fu">rank</span>(L), <span class="at">rank_V =</span> <span class="fu">rank</span>(V), <span class="at">label =</span> ASSET_SHORT[asset_id]) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank_L, rank_V)) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">color =</span> <span class="st">"#0166CC"</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">box.padding =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">6.3</span>)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">6.3</span>)) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Rank by our loss (6 = largest)"</span>, <span class="at">y =</span> <span class="st">"Rank by crew value (6 = most attractive)"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Our biggest worries are not the crew's favourites"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-divergence" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatter plot of six assets by rank of defender loss on the horizontal axis and rank of crew value on the vertical axis, with a diagonal reference line. Pipeline and identity lie far from the line; platform lies on it.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-divergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="02-allocation_files/figure-html/fig-divergence-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Rank of each asset by our loss against rank by the crew’s value. Distance from the diagonal measures disagreement."><img src="02-allocation_files/figure-html/fig-divergence-1.png" class="img-fluid figure-img" alt="Scatter plot of six assets by rank of defender loss on the horizontal axis and rank of crew value on the vertical axis, with a diagonal reference line. Pipeline and identity lie far from the line; platform lies on it." width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-divergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Rank of each asset by our loss against rank by the crew’s value. Distance from the diagonal measures disagreement.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="reader-note">
+<p><strong>How to read the plot.</strong> Each dot is an asset. Moving right means a larger loss for us; moving up means more attractive to the crew. The dashed diagonal marks assets where both sides agree on the ranking.</p>
+<p><strong>What the plot tells you.</strong> The pipeline is our largest loss but ranks last for the crew, so the crew has little reason to attack it. Identity is the reverse. A plan built only on our own risk ranking will misjudge where the crew goes.</p>
+</div>
+</section>
+<section id="four-strategies-at-the-base-budget" class="level2">
+<h2 class="anchored" data-anchor-id="four-strategies-at-the-base-budget">Four strategies at the base budget</h2>
+<p>We compare four ways to spend $9.0M. The robust strategy joins on page 4.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>four <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"risk_ranked"</span>, <span class="st">"proportional"</span>, <span class="st">"uniform"</span>, <span class="st">"textbook"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>base<span class="sc">$</span>strategies <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(strategy <span class="sc">%in%</span> four) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sm <span class="sc">|&gt;</span> <span class="fu">select</span>(strategy, target), <span class="at">by =</span> <span class="st">"strategy"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">strategy =</span> <span class="fu">factor</span>(STRAT_LABELS[strategy], <span class="at">levels =</span> STRAT_LABELS[four]),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">asset =</span> <span class="fu">factor</span>(ASSET_SHORT[asset_id], <span class="at">levels =</span> ASSET_SHORT),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">hit =</span> <span class="fu">ifelse</span>(asset_id <span class="sc">==</span> target, <span class="st">"Crew's target"</span>, <span class="st">"Other asset"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(asset, coverage, <span class="at">fill =</span> hit)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>strategy, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Crew's target"</span> <span class="ot">=</span> <span class="st">"#D98C3A"</span>, <span class="st">"Other asset"</span> <span class="ot">=</span> <span class="st">"#B5B5B5"</span>), <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Coverage"</span>) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-coverage-small-multiples" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four bar-chart panels, one per strategy, showing coverage on each of six assets. The attacked asset is highlighted: identity for risk-ranked, proportional and uniform, and corporate IT for the textbook equilibrium.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coverage-small-multiples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="02-allocation_files/figure-html/fig-coverage-small-multiples-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Coverage by asset under four strategies. The crew’s chosen target is highlighted in each panel."><img src="02-allocation_files/figure-html/fig-coverage-small-multiples-1.png" class="img-fluid figure-img" alt="Four bar-chart panels, one per strategy, showing coverage on each of six assets. The attacked asset is highlighted: identity for risk-ranked, proportional and uniform, and corporate IT for the textbook equilibrium." width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coverage-small-multiples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Coverage by asset under four strategies. The crew’s chosen target is highlighted in each panel.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="reader-note">
+<p><strong>How to read the plot.</strong> Each panel is one way to split the budget. Bars show how much of each asset is protected. The orange bar is the asset the crew would attack if it reads our defences perfectly.</p>
+<p><strong>What the plot tells you.</strong> Risk-ranked piles protection onto two assets and leaves identity at the floor, which is where the crew goes. Proportional and uniform spread money out but still leave identity as the best target. Only the textbook plan changes the crew’s destination.</p>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sm <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(strategy <span class="sc">%in%</span> four) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Strategy =</span> STRAT_LABELS[strategy], <span class="at">Target =</span> ASSET_SHORT[target], <span class="at">Loss =</span> loss_rational) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">Target =</span> <span class="st">"Crew target"</span>, <span class="at">Loss =</span> <span class="st">"Expected loss ($M)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> Loss, <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-strategy-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-strategy-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Crew target and our expected loss under each strategy, assuming a perfectly rational crew.
+</figcaption>
+<div aria-describedby="tbl-strategy-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="umviefafxr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#umviefafxr table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#umviefafxr thead, #umviefafxr tbody, #umviefafxr tfoot, #umviefafxr tr, #umviefafxr td, #umviefafxr th {
+  border-style: none;
+}
+
+#umviefafxr p {
+  margin: 0;
+  padding: 0;
+}
+
+#umviefafxr .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#umviefafxr .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#umviefafxr .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#umviefafxr .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#umviefafxr .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#umviefafxr .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#umviefafxr .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#umviefafxr .gt_col_heading {
+  color: #333333;
+  background-color: #F2F2F2;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#umviefafxr .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #F2F2F2;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#umviefafxr .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#umviefafxr .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#umviefafxr .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#umviefafxr .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#umviefafxr .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#umviefafxr .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#umviefafxr .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#umviefafxr .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#umviefafxr .gt_row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#umviefafxr .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#umviefafxr .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#umviefafxr .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#umviefafxr .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#umviefafxr .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#umviefafxr .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#umviefafxr .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#umviefafxr .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#umviefafxr .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#umviefafxr .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#umviefafxr .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#umviefafxr .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#umviefafxr .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#umviefafxr .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#umviefafxr .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#umviefafxr .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#umviefafxr .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#umviefafxr .gt_left {
+  text-align: left;
+}
+
+#umviefafxr .gt_center {
+  text-align: center;
+}
+
+#umviefafxr .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#umviefafxr .gt_font_normal {
+  font-weight: normal;
+}
+
+#umviefafxr .gt_font_bold {
+  font-weight: bold;
+}
+
+#umviefafxr .gt_font_italic {
+  font-style: italic;
+}
+
+#umviefafxr .gt_super {
+  font-size: 65%;
+}
+
+#umviefafxr .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#umviefafxr .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#umviefafxr .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#umviefafxr .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#umviefafxr .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#umviefafxr .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#umviefafxr .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#umviefafxr .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#umviefafxr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Strategy" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Strategy</th>
+<th id="Target" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Crew target</th>
+<th id="Loss" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Expected loss ($M)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Strategy">Risk-ranked</td>
+<td class="gt_row gt_left" headers="Target">Identity</td>
+<td class="gt_row gt_right" headers="Loss">13.9</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Strategy">Proportional</td>
+<td class="gt_row gt_left" headers="Target">Identity</td>
+<td class="gt_row gt_right" headers="Loss">10.6</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Strategy">Uniform</td>
+<td class="gt_row gt_left" headers="Target">Identity</td>
+<td class="gt_row gt_right" headers="Loss">10.5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Strategy">Textbook equilibrium</td>
+<td class="gt_row gt_left" headers="Target">Corporate IT</td>
+<td class="gt_row gt_right" headers="Loss">4.9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="reader-note">
+<p><strong>How to read the table.</strong> Each row is a strategy. The second column is the asset the crew attacks if it picks its best option. The third is our average loss from that attack.</p>
+<p><strong>What the table tells you.</strong> Risk-ranking has the highest loss. The textbook plan looks far better, but this table assumes we know exactly what the crew wants. Page 4 tests that assumption.</p>
+</div>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
+<p>Risk-ranked funds the platform and pipeline and leaves identity at the floor. The crew sees this and goes to identity, for an expected loss of $13.9M.</p>
+<p>The textbook equilibrium does something cleverer. It sets coverage so that the crew earns the same on 5 of the six assets. It lets the attack fall on Corporate IT, a low-impact target, and cuts expected loss to $4.9M.</p>
+<p>The trick has a price. The crew values the pipeline too little to bother, so the textbook plan holds the pipeline at 25%, the floor. The pipeline is our largest single loss.</p>
+<p>This is the trap: the plan only works if we’ve read the crew perfectly.</p>
+</section>
+<section id="alignment-check" class="level2">
+<h2 class="anchored" data-anchor-id="alignment-check">Alignment check</h2>
+<p>What if the crew wanted what we fear most? We reran the comparison with crew values proportional to our losses. The textbook plan then costs $13.5M, with the crew attacking Identity. Risk-ranked costs $23.2M, with the crew attacking Client data.</p>
+<p>The gap does not close. Concentration itself is the problem, not just misreading the attacker: risk-ranked spends heavily on a few assets and leaves the rest cheap to hit, whatever the crew wants.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-the-game.html" class="pagination-link" aria-label="The Game">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">The Game</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-robustness.html" class="pagination-link" aria-label="Robustness">
+        <span class="nav-page-text">Robustness</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Seeking Eureka · Illustrative synthetic analysis · Not investment or security advice</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://seeking-eureka.com/projects.html">
+<p>Seeking Eureka projects</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
