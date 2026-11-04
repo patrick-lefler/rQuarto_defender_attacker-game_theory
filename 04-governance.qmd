@@ -48,7 +48,7 @@ Natural follow-ons are repeated play, mixtures of attacker types, and the attack
 
 ## Further reading
 
-The Three Questions model-governance framework: *link to be supplied by the project owner*.
+For a framework that tests any risk model, see [Three Questions for Any Risk Model](https://patrick-lefler.com/rQuarto_three_questions_for_any_risk_model_2026-10-22/).
 
 ## Diagnostics
 
