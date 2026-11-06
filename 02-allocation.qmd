@@ -48,7 +48,7 @@ assets |>
 ```
 
 ::: {.reader-note}
-**How to read the table.** Each row is an asset. The first block is what a successful attack would cost us. "Crew value" is what the crew gains from a successful attack. "Cost to cover" is the price of full coverage, and the cap is the most protection we can reach. The last column feeds two of the strategies.
+**How to read the table.** Each row is an asset. The first block is what a successful attack costs us; "crew value" is what the crew gains. "Cost to cover" is the price of full coverage, and the cap is the most protection we can reach.
 
 **What the table tells you.** Our biggest loss (the pipeline) is among the crew's least valued targets, while identity is the crew's favorite and costs us far less. The wide 90% intervals warn that a typical loss can differ greatly from the average.
 :::
@@ -105,7 +105,7 @@ base$strategies |>
 ```
 
 ::: {.reader-note}
-**How to read the plot.** Each panel is one way to split the budget. Bars show how much of each asset is protected. The orange bar is the asset the crew would attack if it reads our defenses perfectly.
+**How to read the plot.** Each panel is one way to split the budget. Bars show how much of each asset is protected. The purple bar is the asset the crew would attack if it reads our defenses perfectly.
 
 **What the plot tells you.** Risk-ranked piles protection onto two assets and leaves identity at the floor, which is where the crew goes. Proportional and uniform spread money out but still leave identity as the best target. Only the textbook plan changes the crew's destination.
 :::

@@ -54,7 +54,7 @@ We drew `r format(N_MC, big.mark = ",")` versions of the crew. In each, every su
 ```{r}
 #| label: fig-misest-targets
 #| fig-cap: "Where simulated crews strike under each strategy when their payoffs differ from our estimate. Labels show our loss if that asset is hit."
-#| fig-alt: "  fig-alt: Stacked horizontal bars, one per strategy, showing the share of simulated crews attacking each of six assets. Under the robust strategy about two-thirds of crews hit corporate IT at a loss of 7.4 million dollars. Under the textbook strategy crews spread across all six assets, including the pipeline at 46.5 million dollars."
+#| fig-alt: "Stacked horizontal bars, one per strategy, showing the share of simulated crews attacking each of six assets. Under the robust strategy about two-thirds of crews hit corporate IT at a loss of 7.4 million dollars. Under the textbook strategy crews spread across all six assets, including the pipeline at 46.5 million dollars."
 ord <- ms$strategy[order(ms$mean)]
 hits <- draws |>
   summarise(n = n(), loss = first(loss), .by = c(strategy, target)) |>
@@ -110,7 +110,7 @@ ms |>
 ::: {.reader-note}
 **How to read the table.** Each row is a strategy, sorted by average loss. The loss columns show the average, the middle case, and the bad cases that 1 in 20 and 1 in 100 simulated crews exceed. The last column shows the asset attacked most often and the share of crews that attack it.
 
-**What the table tells you.** The robust strategy has the lowest average and the smallest bad cases. The textbook equilibrium has the worst average, and its 95th percentile is `r sprintf('%.1f', p95_of('textbook') / p95_of('robust'))` times the robust figure. The crew's favourite target also differs across strategies.
+**What the table tells you.** The robust strategy has the lowest average and the smallest bad cases. The textbook equilibrium has the worst average, and its 95th percentile is `r sprintf('%.1f', p95_of('textbook') / p95_of('robust'))` times the robust figure. The crew's favorite target also differs across strategies.
 :::
 
 ::: {.callout-tip title="How much each strategy relies on a perfect read"}
@@ -121,7 +121,7 @@ If our read of the crew is wrong, the robust strategy loses `r fmt_m(mean_of("ro
 
 The robust strategy assumes the crew *mostly*, but not always, picks the best target. It gives each target a chance of being hit that rises with how attractive it is to the crew, then minimizes our expected loss against those chances. A rationality parameter, $\lambda$, controls how sharp the crew is.
 
-We set $\lambda =$ `r LAMBDA_ROBUST`, chosen on a separate set of simulated crews so the choice is not tuned to the results we report. Optimizing at 2 gives the lowest average loss: `r fmt_m(lam_of(1), 2)` at 1, `r fmt_m(lam_of(2), 2)` at 2, `r fmt_m(lam_of(3), 2)` at 3 and `r fmt_m(lam_of(5), 2)` at 5. Optimizing at 1 or 2 gives the lowest average loss under misestimation: `r fmt_m(lam_of(1), 2)` at 1, `r fmt_m(lam_of(2), 2)` at 2, `r fmt_m(lam_of(3), 2)` at 3 and `r fmt_m(lam_of(5), 2)` at 5.
+We set $\lambda =$ `r LAMBDA_ROBUST`, chosen on a separate set of simulated crews so the choice is not tuned to the results we report.  Optimizing at 1 or 2 gives the lowest average loss under misestimation: `r fmt_m(lam_of(1), 2)` at 1, `r fmt_m(lam_of(2), 2)` at 2, `r fmt_m(lam_of(3), 2)` at 3 and `r fmt_m(lam_of(5), 2)` at 5.
 
 ::: {.callout-note collapse="true" title="The math"}
 The crew attacks target $t$ with probability
@@ -178,9 +178,9 @@ fr |>
 ```
 
 ::: {.reader-note}
-**How to read the plot.** Each line shows how average loss falls as the budget grows, for one strategy, when we misjudge the crew. Lower is better. The dotted vertical line is our base budget.
-
-**What the plot tells you.** Robust has the lowest loss at nearly every budget. More money does not always help a simple plan. Risk-ranked rises from $12.2M at $11.0M to $15.3M at $14.0M, and textbook from $15.3M at $9.0M to $17.0M at $11.0M. New coverage pushes the crew toward an asset we left thin. The exception at $5.5M is expected: robust is built to beat a sharp crew, and against that crew it still wins at this budget, but in the misjudgment test a baseline edges it out. Above $16.5M, every asset reaches its coverage cap and all lines flatten.
+**How to read the plot.** Each line shows average loss by budget for one strategy when we misjudge the crew. The dotted line is our base budget.
+ 
+**What the plot tells you.** Robust is lowest at nearly every budget. Extra money can hurt a simple plan: risk-ranked rises from `r fmt_m(at_b("risk_ranked", rr_lo, "mc_mean"))` at `r fmt_m(rr_lo)` to `r fmt_m(at_b("risk_ranked", rr_hi, "mc_mean"))` at `r fmt_m(rr_hi)`, and textbook from `r fmt_m(at_b("textbook", BUDGET_BASE, "mc_mean"))` at `r fmt_m(BUDGET_BASE)` to `r fmt_m(at_b("textbook", tb_hi, "mc_mean"))` at `r fmt_m(tb_hi)`, as new coverage pushes the crew toward a thin asset. At `r paste(fmt_m(exc), collapse = ", ")` a baseline edges ahead, though robust still beats the sharp crew it is built for. Above `r fmt_m(flat_b)` every asset hits its cap.
 :::
 
 Moving from `r fmt_m(b0)` to `r fmt_m(b1)` lowers the expected loss from misjudging the crew by `r fmt_m(gain("robust"), 2)` under robust and `r fmt_m(gain("risk_ranked"), 2)` under risk-ranked. Robust still leads at `r fmt_m(b1)`: `r fmt_m(at_b("robust", b1, "mc_mean"))` against `r fmt_m(at_b("risk_ranked", b1, "mc_mean"))`. Across the budget grid from `r fmt_m(min(BUDGET_GRID))` to `r fmt_m(max(BUDGET_GRID), 0)`, robust is lowest or tied at every budget except `r paste(fmt_m(exc), collapse = ", ")`.
