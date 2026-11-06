@@ -44,8 +44,22 @@ main_32 <- function() {
   res <- run_misestimation(strats, assets)
   save_result(res$draws, "misest_draws")
   save_result(res$summary, "misest_summary")
+
+  # Perfect-information benchmark: re-solve the textbook equilibrium on each
+  # draw's TRUE crew payoffs (same seed -> same draws as run_misestimation)
+  mult  <- misest_multipliers(N_MC, MISEST_SIGMA, SEED, nrow(assets))
+  Vtrue <- sweep(mult, 2, assets$V, `*`)
+  pi_loss <- purrr::map_dbl(seq_len(nrow(Vtrue)), \(i) {
+    solve_sse(BUDGET_BASE, assets, V = Vtrue[i, ])$loss
+  })
+  evpi <- res$summary |>
+    dplyr::select(strategy, mean) |>
+    dplyr::mutate(pi_mean = mean(pi_loss), evpi = mean - pi_mean)
+  save_result(list(pi_loss = pi_loss, pi_mean = mean(pi_loss), evpi = evpi), "evpi")
 }
+
 if (sys.nframe() == 0) {
-  for (f in c("R/00_params.R", "R/01_utils.R")) source(f)
+  for (f in c("R/00_params.R", "R/01_utils.R", "R/20_solve_sse.R")) source(f)
   main_32()
 }
+

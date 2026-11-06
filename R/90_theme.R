@@ -33,3 +33,5 @@ gt_se <- function(tbl) {
     ) |>
     gt::cols_align(align = "right", columns = tidyselect::where(is.numeric))
 }
+ASSET_COLS <- c("Platform" = "#5B3A70", "Pipeline" = "#2E7D6B", "Client data" = "#A23B48",
+                "Identity" = "#6B6B2E", "Corporate IT" = "#5F7385", "Vendor" = "#9C6A8E")
