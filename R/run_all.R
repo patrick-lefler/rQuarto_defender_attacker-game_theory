@@ -73,12 +73,28 @@ same_rank <- identical(s0$strategy[order(s0$mean)], s1$strategy[order(s1$mean)])
 d6 <- chk("Monte Carlo stability (seed + 1)", all(pct <= 0.05) && same_rank,
           sprintf("max change in mean %.1f%%; ranking %s", 100 * max(pct), if (same_rank) "unchanged" else "CHANGED"))
 
+
+# 8. QRE dominance: robust minimizes its own objective (QRE loss at LAMBDA_ROBUST) at every
+# budget. This shows the $5.5M exception on the frontier is a property of the misjudgment
+# test, not an optimizer failure.
+qd <- fr$coverage |>
+  dplyr::arrange(budget, strategy, match(asset_id, assets$asset_id)) |>
+  dplyr::summarise(obj = qre_loss(coverage, assets, LAMBDA_ROBUST), .by = c(budget, strategy)) |>
+  dplyr::summarise(robust = obj[strategy == "robust"],
+                   best_other = min(obj[strategy != "robust"]), .by = budget) |>
+  dplyr::mutate(margin = best_other - robust)
+tight <- qd |> dplyr::filter(margin > 1e-6) |> dplyr::slice_min(margin, n = 1)
+d8 <- chk("Robust minimizes the QRE objective at every budget", all(qd$margin > -1e-6),
+          sprintf("Robust lowest or tied at all %d budgets; closest call at %s: robust %.2f vs best other %.2f",
+                  nrow(qd), fmt_m(tight$budget), tight$robust, tight$best_other))
+
+
 # 7. Word count
 wc <- wordcount_table(".")
 d7 <- chk("Word count <= 4,000", wordcount_ok(wc),
           sprintf("%d prose words across %d of 5 pages written", sum(wc$prose, na.rm = TRUE), sum(!is.na(wc$prose))))
 
-diag <- dplyr::bind_rows(d1, d2, d3, d4, d5, d6, d7)
+diag <- dplyr::bind_rows(d1, d2, d3, d4, d5, d6, d8) # word count is for internal use only
 save_result(diag, "diagnostics")
 
 pk <- c("highs", "nloptr", "dplyr", "ggplot2", "gt", "testthat")
@@ -88,6 +104,7 @@ save_result(list(
   built = format(Sys.time(), "%Y-%m-%d %H:%M"), session = utils::sessionInfo()
 ), "session_info")
 
-print(as.data.frame(diag), right = FALSE)
+print(as.data.frame(dplyr::bind_rows(diag, d7)), right = FALSE)
 cat(sprintf("run_all finished in %.1f s\n", as.numeric(difftime(Sys.time(), t0, units = "secs"))))
-quit(status = if (all(diag$result == "pass")) 0 else 1)
+quit(status = if (all(c(diag$result, d7$result) == "pass")) 0 else 1)
+

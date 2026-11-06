@@ -67,7 +67,8 @@ diag |>
 ::: {.reader-note}
 **How to read the table.** Each row is a test of the calculations. "Pass" means the check met its standard. The detail column states what was checked.
 
-**What the table tells you.** The checks cover the solver, the budget, the Monte Carlo draws and the word limit. A pass says the arithmetic is consistent, not that the assumptions are right.
+**What the table tells you.** The checks cover the solver, the robust optimizer, the budget, and the Monte Carlo draws.
+
 :::
 
 ```{r}
@@ -91,9 +92,10 @@ tibble::tibble(
 
 ## Session Information
 
-``` {r session-information}
+::: {.callout-note collapse="true" title="Full R session information"}
+```{r}
+#| label: session-information
 #| echo: false
-
 utils::sessionInfo()
-
 ```
+:::

@@ -14,7 +14,7 @@ al <- read_result("alignment")$summary
 loss_of <- \(s) sm$loss_rational[sm$strategy == s]
 target_of <- \(s) sm$target[sm$strategy == s]
 cov_of <- \(s, id) base$strategies$coverage[base$strategies$strategy == s & base$strategies$asset_id == id]
-nm <- \(id) ASSET_SHORT[[id]]
+nm <- \(id) ASSET_PROSE[[id]]
 n_tie <- length(base$textbook_attack_set)
 ```
 
@@ -50,7 +50,7 @@ assets |>
 ::: {.reader-note}
 **How to read the table.** Each row is an asset. The first block is what a successful attack would cost us. "Crew value" is what the crew gains from a successful attack. "Cost to cover" is the price of full coverage, and the cap is the most protection we can reach. The last column feeds two of the strategies.
 
-**What the table tells you.** Our biggest loss (the pipeline) is among the crew's least valued targets, while identity is the crew's favourite and costs us far less. The wide 90% intervals warn that a typical loss can differ greatly from the average.
+**What the table tells you.** Our biggest loss (the pipeline) is among the crew's least valued targets, while identity is the crew's favorite and costs us far less. The wide 90% intervals warn that a typical loss can differ greatly from the average.
 :::
 
 ## Where we and the crew disagree
@@ -68,7 +68,7 @@ assets |>
   scale_x_continuous(breaks = 1:6, limits = c(0.7, 6.3)) +
   scale_y_continuous(breaks = 1:6, limits = c(0.7, 6.3)) +
   labs(x = "Rank by our loss (6 = largest)", y = "Rank by crew value (6 = most attractive)",
-       title = "Our biggest worries are not the crew's favourites")
+       title = "Our biggest worries are not the crew's favorites")
 ```
 
 ::: {.reader-note}
@@ -105,7 +105,7 @@ base$strategies |>
 ```
 
 ::: {.reader-note}
-**How to read the plot.** Each panel is one way to split the budget. Bars show how much of each asset is protected. The orange bar is the asset the crew would attack if it reads our defences perfectly.
+**How to read the plot.** Each panel is one way to split the budget. Bars show how much of each asset is protected. The orange bar is the asset the crew would attack if it reads our defenses perfectly.
 
 **What the plot tells you.** Risk-ranked piles protection onto two assets and leaves identity at the floor, which is where the crew goes. Proportional and uniform spread money out but still leave identity as the best target. Only the textbook plan changes the crew's destination.
 :::

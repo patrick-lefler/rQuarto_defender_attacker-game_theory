@@ -15,17 +15,12 @@ rat_of <- \(s) base$loss_rational[base$strategy == s]
 tgt_of <- \(s) base$target[base$strategy == s]
 cut_mean <- 1 - mean_of("robust") / mean_of("risk_ranked")
 cut_tail <- 1 - p95_of("robust") / p95_of("risk_ranked")
-```
-
-``` {r setup_inline_values}
-
 rr  <- base |> filter(strategy == "risk_ranked")
 rb  <- base |> filter(strategy == "robust")
 rrm <- ms   |> filter(strategy == "risk_ranked")
 rbm <- ms   |> filter(strategy == "robust")
 
 ```
-
 
 
 *All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative and synthetic.*
@@ -41,11 +36,10 @@ We study a 500-person fintech firm whose cloud platform is critical infrastructu
 1. **Risk-ranking invites the attack.** Funding the top risks first leaves identity at baseline coverage, and the crew goes there. If we read the crew perfectly, expected loss is `r fmt_m(rr$loss_rational)` against `r fmt_m(rb$loss_rational)` for the robust allocation; if we misjudge it, `r fmt_m(rrm$mean)` against `r fmt_m(rbm$mean)`.
 
 
-2. **The textbook equilibrium looks best on paper and is worst under uncertainty.** If we read the crew perfectly, it cuts loss to `r fmt_m(rat_of("textbook"))`. If we misjudge the crew modestly, the 95th percentile loss is `r fmt_m(p95_of("textbook"), 0)`.
+2. **The textbook equilibrium looks best on paper and is worst under uncertainty.** If we read the crew perfectly, it cuts loss to `r fmt_m(rat_of("textbook"))`. If we misjudge the crew modestly, the 95th percentile loss is `r fmt_m(p95_of("textbook"))`.
 3. **The robust allocation anticipates the attacker without betting on a perfect read.** It cuts expected loss by `r fmt_pct(cut_mean)` and the tail by `r fmt_pct(cut_tail)` against risk-ranked.
 
 ```{r}
-
 #| label: fig-hero
 #| fig-cap: "Expected loss per campaign by strategy, if we read the crew perfectly and if we misjudge it. The line runs to the 1-in-20 bad case."
 #| fig-alt: "Paired horizontal bars for five strategies, ordered by loss under misjudgment. Robust has the lowest misjudged loss at 9.0 million dollars with a 1-in-20 bad case of 14.9 million. The textbook equilibrium has the lowest loss if read perfectly, 4.9 million, but the highest under misjudgment, 15.3 million, with a 1-in-20 bad case of 46.5 million."
@@ -91,7 +85,7 @@ ggplot(d) +
 ```
 
 ::: {.reader-note}
-**How to read the plot.** Each strategy has two bars. The lighter bar is our loss if we read the crew perfectly. The darker bar is our average loss if we misjudge the crew, and the black line reaches the 95th percentile, which only 1 in 20 misjudgments exceeds. Strategies run from lowest to highest misjudged loss.
+**How to read the plot.** For each strategy, the light bar is our loss if we read the crew perfectly; the dark bar is our average loss if we misjudge it, and the line runs to the 1-in-20 bad case.
 
 **What the plot tells you.** The textbook equilibrium has the lowest light bar and the highest dark bar: it is cheapest on paper and costliest when wrong. The robust strategy gives up some of the paper saving and has the lowest average and the shortest line.
 :::
