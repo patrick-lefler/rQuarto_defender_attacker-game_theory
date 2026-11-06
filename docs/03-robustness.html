@@ -251,21 +251,25 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">xmid =</span> <span class="fu">cumsum</span>(share) <span class="sc">-</span> share <span class="sc">/</span> <span class="dv">2</span>, <span class="at">.by =</span> strategy)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>callout <span class="ot">&lt;-</span> hits <span class="sc">|&gt;</span> <span class="fu">filter</span>(target <span class="sc">==</span> <span class="st">"PIPE"</span>, share <span class="sc">&gt;=</span> <span class="fl">0.03</span>)   <span class="co"># rare but costly hits</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hits, <span class="fu">aes</span>(<span class="at">x =</span> share, <span class="at">y =</span> strategy, <span class="at">fill =</span> asset)) <span class="sc">+</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">ifelse</span>(share <span class="sc">&gt;=</span> <span class="fl">0.08</span>, <span class="fu">fmt_m</span>(loss), <span class="st">""</span>)),</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> callout, <span class="fu">aes</span>(<span class="at">x =</span> xmid, <span class="at">y =</span> strategy, <span class="at">label =</span> <span class="fu">fmt_m</span>(loss)),</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">nudge_y =</span> <span class="fl">0.48</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"#2E7D6B"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.01</span>))) <span class="sc">+</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> STRAT_LABELS) <span class="sc">+</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> ASSET_COLS, <span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Share of simulated crews"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Where the crew strikes when we misjudge it"</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Labels show our loss if that asset is hit"</span>) <span class="sc">+</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>, <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>share_of <span class="ot">&lt;-</span> \(s, a) <span class="fu">sum</span>(hits<span class="sc">$</span>share[hits<span class="sc">$</span>strategy <span class="sc">==</span> s <span class="sc">&amp;</span> hits<span class="sc">$</span>target <span class="sc">==</span> a])</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>rb_corp  <span class="ot">&lt;-</span> <span class="fu">share_of</span>(<span class="st">"robust"</span>, <span class="st">"CORP"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>tb_pipe  <span class="ot">&lt;-</span> <span class="fu">share_of</span>(<span class="st">"textbook"</span>, <span class="st">"PIPE"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hits, <span class="fu">aes</span>(<span class="at">x =</span> share, <span class="at">y =</span> strategy, <span class="at">fill =</span> asset)) <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">ifelse</span>(share <span class="sc">&gt;=</span> <span class="fl">0.08</span>, <span class="fu">fmt_m</span>(loss), <span class="st">""</span>)),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> callout, <span class="fu">aes</span>(<span class="at">x =</span> xmid, <span class="at">y =</span> strategy, <span class="at">label =</span> <span class="fu">fmt_m</span>(loss)),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">nudge_y =</span> <span class="fl">0.48</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"#2E7D6B"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.01</span>))) <span class="sc">+</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> STRAT_LABELS) <span class="sc">+</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> ASSET_COLS, <span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Share of simulated crews"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Where the crew strikes when we misjudge it"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Labels show our loss if that asset is hit"</span>) <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>, <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-misest-targets" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Stacked horizontal bars, one per strategy, showing the share of simulated crews attacking each of six assets. Under the robust strategy about two-thirds of crews hit Corporate IT at a loss of 7.4 million dollars. Under the textbook strategy crews spread across all six assets, including the pipeline at 46.5 million dollars.">
@@ -282,7 +286,7 @@ Figure&nbsp;1: Where simulated crews strike under each strategy when their payof
 </div>
 <div class="reader-note">
 <p><strong>How to read the plot.</strong> Each bar is one strategy, ordered from lowest average loss (top) to highest. The colored segments show the share of simulated crews that attack each asset, and the label is what that attack would cost us.</p>
-<p><strong>What the plot tells you.</strong> Robust funnels about two-thirds of crews onto Corporate IT, a cheap hit. The textbook plan scatters them across all six assets, and about one crew in eighteen reaches the pipeline, a $46.5M loss.</p>
+<p><strong>What the plot tells you.</strong> Robust has the lowest loss at nearly every budget. More money does not always help a simple plan. Risk-ranked rises from $12.2M at $11.0M to $15.3M at $14.0M, and textbook from $15.3M at $9.0M to $17.0M at $11.0M. New coverage pushes the crew toward an asset we left thin. The exception at $5.5M is expected: robust is built to beat a sharp crew, and against that crew it still wins at this budget, but in the misjudgment test a baseline edges it out. Above $16.5M, every asset reaches its coverage cap and all lines flatten.</p>
 </div>
 <div class="cell">
 <details class="code-fold">
@@ -304,23 +308,23 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
 </figcaption>
 <div aria-describedby="tbl-misest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="dtsgnoskjk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dtsgnoskjk table {
+<div id="tezcqgphai" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tezcqgphai table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dtsgnoskjk thead, #dtsgnoskjk tbody, #dtsgnoskjk tfoot, #dtsgnoskjk tr, #dtsgnoskjk td, #dtsgnoskjk th {
+#tezcqgphai thead, #tezcqgphai tbody, #tezcqgphai tfoot, #tezcqgphai tr, #tezcqgphai td, #tezcqgphai th {
   border-style: none;
 }
 
-#dtsgnoskjk p {
+#tezcqgphai p {
   margin: 0;
   padding: 0;
 }
 
-#dtsgnoskjk .gt_table {
+#tezcqgphai .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -346,12 +350,12 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-left-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_caption {
+#tezcqgphai .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dtsgnoskjk .gt_title {
+#tezcqgphai .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -363,7 +367,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-bottom-width: 0;
 }
 
-#dtsgnoskjk .gt_subtitle {
+#tezcqgphai .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -375,7 +379,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-top-width: 0;
 }
 
-#dtsgnoskjk .gt_heading {
+#tezcqgphai .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -387,13 +391,13 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-right-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_bottom_border {
+#tezcqgphai .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_col_headings {
+#tezcqgphai .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -408,7 +412,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-right-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_col_heading {
+#tezcqgphai .gt_col_heading {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -428,7 +432,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   overflow-x: hidden;
 }
 
-#dtsgnoskjk .gt_column_spanner_outer {
+#tezcqgphai .gt_column_spanner_outer {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -440,15 +444,15 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   padding-right: 4px;
 }
 
-#dtsgnoskjk .gt_column_spanner_outer:first-child {
+#tezcqgphai .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dtsgnoskjk .gt_column_spanner_outer:last-child {
+#tezcqgphai .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dtsgnoskjk .gt_column_spanner {
+#tezcqgphai .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -460,11 +464,11 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   width: 100%;
 }
 
-#dtsgnoskjk .gt_spanner_row {
+#tezcqgphai .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dtsgnoskjk .gt_group_heading {
+#tezcqgphai .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -490,7 +494,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   text-align: left;
 }
 
-#dtsgnoskjk .gt_empty_group_heading {
+#tezcqgphai .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -505,15 +509,15 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   vertical-align: middle;
 }
 
-#dtsgnoskjk .gt_from_md > :first-child {
+#tezcqgphai .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dtsgnoskjk .gt_from_md > :last-child {
+#tezcqgphai .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dtsgnoskjk .gt_row {
+#tezcqgphai .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -532,7 +536,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   overflow-x: hidden;
 }
 
-#dtsgnoskjk .gt_stub {
+#tezcqgphai .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -545,7 +549,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   padding-right: 5px;
 }
 
-#dtsgnoskjk .gt_stub_row_group {
+#tezcqgphai .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -559,15 +563,15 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   vertical-align: top;
 }
 
-#dtsgnoskjk .gt_row_group_first td {
+#tezcqgphai .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dtsgnoskjk .gt_row_group_first th {
+#tezcqgphai .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dtsgnoskjk .gt_summary_row {
+#tezcqgphai .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -577,16 +581,16 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   padding-right: 5px;
 }
 
-#dtsgnoskjk .gt_first_summary_row {
+#tezcqgphai .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_first_summary_row.thick {
+#tezcqgphai .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dtsgnoskjk .gt_last_summary_row {
+#tezcqgphai .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -596,7 +600,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-bottom-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_grand_summary_row {
+#tezcqgphai .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -606,7 +610,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   padding-right: 5px;
 }
 
-#dtsgnoskjk .gt_first_grand_summary_row {
+#tezcqgphai .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -616,7 +620,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-top-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_last_grand_summary_row_top {
+#tezcqgphai .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -626,11 +630,11 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-bottom-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_striped {
+#tezcqgphai .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dtsgnoskjk .gt_table_body {
+#tezcqgphai .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -639,7 +643,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-bottom-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_footnotes {
+#tezcqgphai .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -653,7 +657,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-right-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_footnote {
+#tezcqgphai .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -662,7 +666,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   padding-right: 5px;
 }
 
-#dtsgnoskjk .gt_sourcenotes {
+#tezcqgphai .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -676,7 +680,7 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   border-right-color: #D3D3D3;
 }
 
-#dtsgnoskjk .gt_sourcenote {
+#tezcqgphai .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -684,72 +688,72 @@ Table&nbsp;1: Loss statistics when the crew’s payoffs are misjudged, by strate
   padding-right: 5px;
 }
 
-#dtsgnoskjk .gt_left {
+#tezcqgphai .gt_left {
   text-align: left;
 }
 
-#dtsgnoskjk .gt_center {
+#tezcqgphai .gt_center {
   text-align: center;
 }
 
-#dtsgnoskjk .gt_right {
+#tezcqgphai .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dtsgnoskjk .gt_font_normal {
+#tezcqgphai .gt_font_normal {
   font-weight: normal;
 }
 
-#dtsgnoskjk .gt_font_bold {
+#tezcqgphai .gt_font_bold {
   font-weight: bold;
 }
 
-#dtsgnoskjk .gt_font_italic {
+#tezcqgphai .gt_font_italic {
   font-style: italic;
 }
 
-#dtsgnoskjk .gt_super {
+#tezcqgphai .gt_super {
   font-size: 65%;
 }
 
-#dtsgnoskjk .gt_footnote_marks {
+#tezcqgphai .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dtsgnoskjk .gt_asterisk {
+#tezcqgphai .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dtsgnoskjk .gt_indent_1 {
+#tezcqgphai .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dtsgnoskjk .gt_indent_2 {
+#tezcqgphai .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dtsgnoskjk .gt_indent_3 {
+#tezcqgphai .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dtsgnoskjk .gt_indent_4 {
+#tezcqgphai .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dtsgnoskjk .gt_indent_5 {
+#tezcqgphai .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dtsgnoskjk .katex-display {
+#tezcqgphai .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dtsgnoskjk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tezcqgphai div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -832,17 +836,17 @@ Loss ($M)
 <p><strong>How to read the table.</strong> Each row is a strategy, sorted by average loss. The loss columns show the average, the middle case, and the bad cases that 1 in 20 and 1 in 100 simulated crews exceed. The last column shows the asset attacked most often and the share of crews that attack it.</p>
 <p><strong>What the table tells you.</strong> The robust strategy has the lowest average and the smallest bad cases. The textbook equilibrium has the worst average, and its 95th percentile is 3.1 times the robust figure. The crew’s favourite target also differs across strategies.</p>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="What perfect intelligence would be worth">
+<div class="callout callout-style-default callout-tip callout-titled" title="How much each strategy relies on a perfect read">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>What perfect intelligence would be worth
+<span class="screen-reader-only">Tip</span>How much each strategy relies on a perfect read
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Perfect intelligence would save the robust strategy $1.6M of expected loss, and the textbook strategy $10.3M. These gaps measure how much each strategy depends on accurate intelligence. Textbook depends on it far more.</p>
+<p>If our read of the crew is wrong, the robust strategy loses $1.6M more than planned, and the textbook strategy loses $10.3M more. The textbook plan’s efficiency rests almost entirely on accurate intelligence.</p>
 </div>
 </div>
 </section>
@@ -945,7 +949,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell hidden">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="188" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 187;"><span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a>sliderRows <span class="op">=</span> <span class="fu">transpose</span>(slider)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="206" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 205;"><span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a>sliderRows <span class="op">=</span> <span class="fu">transpose</span>(slider)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-1" data-nodetype="declaration">
@@ -956,7 +960,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="193" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 192;"><span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a>viewof budget <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">5</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">9</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Allocable budget ($M)"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="211" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 210;"><span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>viewof budget <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">5</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">9</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Allocable budget ($M)"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="declaration">
@@ -967,7 +971,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell hidden">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="199" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 198;"><span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a>now <span class="op">=</span> sliderRows<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span>(d<span class="op">.</span><span class="at">budget</span> <span class="op">-</span> budget) <span class="op">&lt;</span> <span class="fl">1e-9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="217" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 216;"><span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a>now <span class="op">=</span> sliderRows<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span>(d<span class="op">.</span><span class="at">budget</span> <span class="op">-</span> budget) <span class="op">&lt;</span> <span class="fl">1e-9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-3" data-nodetype="declaration">
@@ -978,7 +982,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell hidden">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="205" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 204;"><span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>rr <span class="op">=</span> now<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">strategy</span> <span class="op">===</span> <span class="st">"risk_ranked"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="223" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 222;"><span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a>rr <span class="op">=</span> now<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">strategy</span> <span class="op">===</span> <span class="st">"risk_ranked"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-4" data-nodetype="declaration">
@@ -989,7 +993,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell hidden">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="211" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 210;"><span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>rb <span class="op">=</span> now<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">strategy</span> <span class="op">===</span> <span class="st">"robust"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="229" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 228;"><span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>rb <span class="op">=</span> now<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">strategy</span> <span class="op">===</span> <span class="st">"robust"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-5" data-nodetype="declaration">
@@ -1000,19 +1004,19 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="216" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 215;"><span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">45</span><span class="op">,</span></span>
-<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">340</span><span class="op">,</span></span>
-<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Coverage"</span><span class="op">,</span> <span class="dt">labelAnchor</span><span class="op">:</span> <span class="st">"center"</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d <span class="op">*</span> <span class="dv">100</span>) <span class="op">+</span> <span class="st">"%"</span>}<span class="op">,</span></span>
-<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fy</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="st">"Platform"</span><span class="op">,</span> <span class="st">"Pipeline"</span><span class="op">,</span> <span class="st">"Client data"</span><span class="op">,</span> <span class="st">"Identity"</span><span class="op">,</span> <span class="st">"Corporate IT"</span><span class="op">,</span> <span class="st">"Vendor"</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span>}<span class="op">,</span></span>
-<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">axis</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> [<span class="st">"Risk-ranked"</span><span class="op">,</span> <span class="st">"Robust equilibrium"</span>]}<span class="op">,</span></span>
-<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="st">"Risk-ranked"</span><span class="op">,</span> <span class="st">"Robust equilibrium"</span>]<span class="op">,</span> <span class="dt">range</span><span class="op">:</span> [<span class="st">"#4D4D4D"</span><span class="op">,</span> <span class="st">"#0166CC"</span>]<span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {<span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"inherit"</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"13px"</span>}<span class="op">,</span></span>
-<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">barX</span>(now<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"coverage"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"strategy_label"</span><span class="op">,</span> <span class="dt">fy</span><span class="op">:</span> <span class="st">"asset"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"strategy_label"</span>})<span class="op">,</span></span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])</span>
-<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="234" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 233;"><span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">45</span><span class="op">,</span></span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">340</span><span class="op">,</span></span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Coverage"</span><span class="op">,</span> <span class="dt">labelAnchor</span><span class="op">:</span> <span class="st">"center"</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d <span class="op">*</span> <span class="dv">100</span>) <span class="op">+</span> <span class="st">"%"</span>}<span class="op">,</span></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fy</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="st">"Platform"</span><span class="op">,</span> <span class="st">"Pipeline"</span><span class="op">,</span> <span class="st">"Client data"</span><span class="op">,</span> <span class="st">"Identity"</span><span class="op">,</span> <span class="st">"Corporate IT"</span><span class="op">,</span> <span class="st">"Vendor"</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span>}<span class="op">,</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">axis</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> [<span class="st">"Risk-ranked"</span><span class="op">,</span> <span class="st">"Robust equilibrium"</span>]}<span class="op">,</span></span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="st">"Risk-ranked"</span><span class="op">,</span> <span class="st">"Robust equilibrium"</span>]<span class="op">,</span> <span class="dt">range</span><span class="op">:</span> [<span class="st">"#4D4D4D"</span><span class="op">,</span> <span class="st">"#0166CC"</span>]<span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {<span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"inherit"</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"13px"</span>}<span class="op">,</span></span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">barX</span>(now<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"coverage"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"strategy_label"</span><span class="op">,</span> <span class="dt">fy</span><span class="op">:</span> <span class="st">"asset"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"strategy_label"</span>})<span class="op">,</span></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])</span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-6" data-nodetype="expression">
@@ -1023,7 +1027,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb11" data-startfrom="233" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 232;"><span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;div class="slider-sentence"&gt;At &lt;b&gt;$</span><span class="sc">${</span>budget<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">M&lt;/b&gt;, the crew's best target is &lt;b&gt;</span><span class="sc">${</span>rr<span class="op">.</span><span class="at">target_label</span><span class="sc">}</span><span class="vs">&lt;/b&gt; under risk-ranked and &lt;b&gt;</span><span class="sc">${</span>rb<span class="op">.</span><span class="at">target_label</span><span class="sc">}</span><span class="vs">&lt;/b&gt; under robust. Expected loss if we misjudge the crew: &lt;b&gt;$</span><span class="sc">${</span>rr<span class="op">.</span><span class="at">mc_mean</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">M&lt;/b&gt; against &lt;b&gt;$</span><span class="sc">${</span>rb<span class="op">.</span><span class="at">mc_mean</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">M&lt;/b&gt;.&lt;/div&gt;`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb11" data-startfrom="251" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 250;"><span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;div class="slider-sentence"&gt;At &lt;b&gt;$</span><span class="sc">${</span>budget<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">M&lt;/b&gt;, the crew's best target is &lt;b&gt;</span><span class="sc">${</span>rr<span class="op">.</span><span class="at">target_label</span><span class="sc">}</span><span class="vs">&lt;/b&gt; under risk-ranked and &lt;b&gt;</span><span class="sc">${</span>rb<span class="op">.</span><span class="at">target_label</span><span class="sc">}</span><span class="vs">&lt;/b&gt; under robust. Expected loss if we misjudge the crew: &lt;b&gt;$</span><span class="sc">${</span>rr<span class="op">.</span><span class="at">mc_mean</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">M&lt;/b&gt; against &lt;b&gt;$</span><span class="sc">${</span>rb<span class="op">.</span><span class="at">mc_mean</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">M&lt;/b&gt;.&lt;/div&gt;`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-7" data-nodetype="expression">
@@ -1034,6 +1038,7 @@ Figure&nbsp;3: Expected loss when we misjudge the crew, by budget. The vertical 
 <div class="reader-note">
 <p><strong>How to read the plot.</strong> Drag the slider to choose a budget. Each group of bars is an asset, with the grey bar for risk-ranked coverage and the blue bar for the robust strategy. The sentence under the chart states the crew’s likely target and our expected loss under each approach.</p>
 <p><strong>What the plot tells you.</strong> As the budget changes, risk-ranked keeps funding the same few assets, while the robust strategy spreads protection toward the places a crew is likely to hit. The sentence shows what that difference costs us.</p>
+<p><strong>Reproduce.</strong> Code and data: <a href="https://github.com/patrick-lefler/rQuarto_defender_attacker-game_theory">GitHub repository</a>. From the project root run <code>Rscript R/run_all.R</code>, then <code>quarto render</code>.</p>
 </div>
 
 
