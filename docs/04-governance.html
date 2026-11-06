@@ -163,6 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#how-a-board-should-use-this" id="toc-how-a-board-should-use-this" class="nav-link active" data-scroll-target="#how-a-board-should-use-this">How a board should use this</a></li>
   <li><a href="#assumptions-register" id="toc-assumptions-register" class="nav-link" data-scroll-target="#assumptions-register">Assumptions register</a></li>
+  <li><a href="#sensitivity" id="toc-sensitivity" class="nav-link" data-scroll-target="#sensitivity">Sensitivity</a></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#diagnostics" id="toc-diagnostics" class="nav-link" data-scroll-target="#diagnostics">Diagnostics</a></li>
@@ -218,23 +219,23 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
 </figcaption>
 <div aria-describedby="tbl-assumptions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="uafmcrtjge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uafmcrtjge table {
+<div id="etskgarxpj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#etskgarxpj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uafmcrtjge thead, #uafmcrtjge tbody, #uafmcrtjge tfoot, #uafmcrtjge tr, #uafmcrtjge td, #uafmcrtjge th {
+#etskgarxpj thead, #etskgarxpj tbody, #etskgarxpj tfoot, #etskgarxpj tr, #etskgarxpj td, #etskgarxpj th {
   border-style: none;
 }
 
-#uafmcrtjge p {
+#etskgarxpj p {
   margin: 0;
   padding: 0;
 }
 
-#uafmcrtjge .gt_table {
+#etskgarxpj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -260,12 +261,12 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-left-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_caption {
+#etskgarxpj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uafmcrtjge .gt_title {
+#etskgarxpj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -277,7 +278,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-bottom-width: 0;
 }
 
-#uafmcrtjge .gt_subtitle {
+#etskgarxpj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -289,7 +290,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-top-width: 0;
 }
 
-#uafmcrtjge .gt_heading {
+#etskgarxpj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -301,13 +302,13 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-right-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_bottom_border {
+#etskgarxpj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_col_headings {
+#etskgarxpj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -322,7 +323,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-right-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_col_heading {
+#etskgarxpj .gt_col_heading {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -342,7 +343,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   overflow-x: hidden;
 }
 
-#uafmcrtjge .gt_column_spanner_outer {
+#etskgarxpj .gt_column_spanner_outer {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -354,15 +355,15 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   padding-right: 4px;
 }
 
-#uafmcrtjge .gt_column_spanner_outer:first-child {
+#etskgarxpj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uafmcrtjge .gt_column_spanner_outer:last-child {
+#etskgarxpj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uafmcrtjge .gt_column_spanner {
+#etskgarxpj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -374,11 +375,11 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   width: 100%;
 }
 
-#uafmcrtjge .gt_spanner_row {
+#etskgarxpj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uafmcrtjge .gt_group_heading {
+#etskgarxpj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -404,7 +405,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   text-align: left;
 }
 
-#uafmcrtjge .gt_empty_group_heading {
+#etskgarxpj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -419,15 +420,15 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   vertical-align: middle;
 }
 
-#uafmcrtjge .gt_from_md > :first-child {
+#etskgarxpj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uafmcrtjge .gt_from_md > :last-child {
+#etskgarxpj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uafmcrtjge .gt_row {
+#etskgarxpj .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -446,7 +447,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   overflow-x: hidden;
 }
 
-#uafmcrtjge .gt_stub {
+#etskgarxpj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -459,7 +460,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   padding-right: 5px;
 }
 
-#uafmcrtjge .gt_stub_row_group {
+#etskgarxpj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -473,15 +474,15 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   vertical-align: top;
 }
 
-#uafmcrtjge .gt_row_group_first td {
+#etskgarxpj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uafmcrtjge .gt_row_group_first th {
+#etskgarxpj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uafmcrtjge .gt_summary_row {
+#etskgarxpj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -491,16 +492,16 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   padding-right: 5px;
 }
 
-#uafmcrtjge .gt_first_summary_row {
+#etskgarxpj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_first_summary_row.thick {
+#etskgarxpj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uafmcrtjge .gt_last_summary_row {
+#etskgarxpj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -510,7 +511,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-bottom-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_grand_summary_row {
+#etskgarxpj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -520,7 +521,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   padding-right: 5px;
 }
 
-#uafmcrtjge .gt_first_grand_summary_row {
+#etskgarxpj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -530,7 +531,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-top-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_last_grand_summary_row_top {
+#etskgarxpj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,11 +541,11 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-bottom-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_striped {
+#etskgarxpj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uafmcrtjge .gt_table_body {
+#etskgarxpj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -553,7 +554,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-bottom-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_footnotes {
+#etskgarxpj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -567,7 +568,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-right-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_footnote {
+#etskgarxpj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -576,7 +577,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   padding-right: 5px;
 }
 
-#uafmcrtjge .gt_sourcenotes {
+#etskgarxpj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -590,7 +591,7 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   border-right-color: #D3D3D3;
 }
 
-#uafmcrtjge .gt_sourcenote {
+#etskgarxpj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -598,72 +599,72 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
   padding-right: 5px;
 }
 
-#uafmcrtjge .gt_left {
+#etskgarxpj .gt_left {
   text-align: left;
 }
 
-#uafmcrtjge .gt_center {
+#etskgarxpj .gt_center {
   text-align: center;
 }
 
-#uafmcrtjge .gt_right {
+#etskgarxpj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uafmcrtjge .gt_font_normal {
+#etskgarxpj .gt_font_normal {
   font-weight: normal;
 }
 
-#uafmcrtjge .gt_font_bold {
+#etskgarxpj .gt_font_bold {
   font-weight: bold;
 }
 
-#uafmcrtjge .gt_font_italic {
+#etskgarxpj .gt_font_italic {
   font-style: italic;
 }
 
-#uafmcrtjge .gt_super {
+#etskgarxpj .gt_super {
   font-size: 65%;
 }
 
-#uafmcrtjge .gt_footnote_marks {
+#etskgarxpj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uafmcrtjge .gt_asterisk {
+#etskgarxpj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uafmcrtjge .gt_indent_1 {
+#etskgarxpj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uafmcrtjge .gt_indent_2 {
+#etskgarxpj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uafmcrtjge .gt_indent_3 {
+#etskgarxpj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uafmcrtjge .gt_indent_4 {
+#etskgarxpj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uafmcrtjge .gt_indent_5 {
+#etskgarxpj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uafmcrtjge .katex-display {
+#etskgarxpj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uafmcrtjge div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#etskgarxpj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -697,8 +698,8 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
 <td class="gt_row gt_left" headers="id">A3</td>
 <td class="gt_row gt_left" headers="assumption">The crew observes coverage before choosing a target</td>
 <td class="gt_row gt_left" headers="why_it_matters">Equilibrium logic relies on the attacker responding to what it sees</td>
-<td class="gt_row gt_left" headers="how_it_could_fail">An attacker who cannot see defences attacks closer to its prior</td>
-<td class="gt_row gt_left" headers="where_tested">Partly tested through the noisy-crew sweep (page 4)</td>
+<td class="gt_row gt_left" headers="how_it_could_fail">An attacker who cannot see defenses attacks closer to its prior</td>
+<td class="gt_row gt_left" headers="where_tested">Partly tested through the noisy-crew sweep (Robustness page)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="id">A4</td>
@@ -719,35 +720,42 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
 <td class="gt_row gt_left" headers="assumption">A stopped attack still costs 10% of the full loss</td>
 <td class="gt_row gt_left" headers="why_it_matters">Sets the value of coverage for the defender</td>
 <td class="gt_row gt_left" headers="how_it_could_fail">A higher share weakens the gain from coverage; a lower share strengthens it</td>
-<td class="gt_row gt_left" headers="where_tested">Not tested (parameter range in params.yaml)</td>
+<td class="gt_row gt_left" headers="where_tested">Sensitivity table: 5% and 20% (robust still best)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="id">A7</td>
 <td class="gt_row gt_left" headers="assumption">Every asset keeps at least 25% hygiene coverage</td>
 <td class="gt_row gt_left" headers="why_it_matters">Fixes a minimum on every asset including low-value ones</td>
 <td class="gt_row gt_left" headers="how_it_could_fail">A different floor changes how much budget is free to allocate</td>
-<td class="gt_row gt_left" headers="where_tested">Not tested (parameter range in params.yaml)</td>
+<td class="gt_row gt_left" headers="where_tested">Sensitivity table: 15% and 35% (robust still best)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="id">A8</td>
 <td class="gt_row gt_left" headers="assumption">Synthetic calibration</td>
 <td class="gt_row gt_left" headers="why_it_matters">All asset values are illustrative</td>
 <td class="gt_row gt_left" headers="how_it_could_fail">Real values could reorder the strategies</td>
-<td class="gt_row gt_left" headers="where_tested">Misestimation Monte Carlo (page 4) stresses the crew's payoffs only</td>
+<td class="gt_row gt_left" headers="where_tested">Misestimation Monte Carlo (Robustness page) stresses the crew's payoffs only</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="id">A9</td>
 <td class="gt_row gt_left" headers="assumption">Robust rationality parameter lambda = 2</td>
 <td class="gt_row gt_left" headers="why_it_matters">Controls how noisy the robust strategy assumes the crew is</td>
 <td class="gt_row gt_left" headers="how_it_could_fail">A very different crew would make a different lambda best</td>
-<td class="gt_row gt_left" headers="where_tested">Lambda sweep (page 4)</td>
+<td class="gt_row gt_left" headers="where_tested">Chosen on a separate simulation seed; lambda sweep (Robustness page)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="id">A10</td>
 <td class="gt_row gt_left" headers="assumption">Crew payoff error is lognormal with sigma 0.35</td>
 <td class="gt_row gt_left" headers="why_it_matters">Defines how badly the firm may misjudge the crew</td>
 <td class="gt_row gt_left" headers="how_it_could_fail">Larger or biased errors would hurt every strategy</td>
-<td class="gt_row gt_left" headers="where_tested">Monte Carlo seed-stability check (diagnostics)</td>
+<td class="gt_row gt_left" headers="where_tested">Sensitivity table: sigma 0.20 and 0.50; seed-stability check (diagnostics)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="id">A11</td>
+<td class="gt_row gt_left" headers="assumption">Assets fail independently (no lateral movement)</td>
+<td class="gt_row gt_left" headers="why_it_matters">Each attack's loss depends only on the asset hit</td>
+<td class="gt_row gt_left" headers="how_it_could_fail">Ransomware crews pivot through identity and corporate IT to reach other systems</td>
+<td class="gt_row gt_left" headers="where_tested">Sensitivity table: higher identity and corporate IT losses (robust still best)</td>
 </tr>
 </tbody>
 </table>
@@ -763,51 +771,51 @@ Table&nbsp;1: Assumptions behind the analysis, why each matters, how it could fa
 <p><strong>What the table tells you.</strong> Several assumptions are not tested here. These are the first places to look when applying the approach to real data, because a wrong assumption can reorder the strategies.</p>
 </div>
 </section>
-<section id="limitations" class="level2">
-<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
-<p>The model has no repeated play: one campaign, one decision. It has no deception or honeypots, which can change what the crew sees. It has one attacker type, so insiders and state actors are out of scope. The budget is static, so it does not respond to new intelligence during the year.</p>
-<p>Natural follow-ons are repeated play, mixtures of attacker types, and the attack-graph Markov chain project.</p>
-</section>
-<section id="further-reading" class="level2">
-<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
-<p>For a framework that tests any risk model, see <a href="https://patrick-lefler.com/rQuarto_three_questions_for_any_risk_model_2026-10-22/">Three Questions for Any Risk Model</a>.</p>
-</section>
-<section id="diagnostics" class="level2">
-<h2 class="anchored" data-anchor-id="diagnostics">Diagnostics</h2>
-<p>All 7 automated checks ran when the results were built; 7 passed.</p>
+<section id="sensitivity" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity">Sensitivity</h2>
+<p>We changed one assumption at a time and reran the full comparison. The robust strategy was best in 8 of 8 cases, including a lateral-movement case where an identity or corporate IT breach spreads and costs more.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>diag <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">check =</span> <span class="st">"Check"</span>, <span class="at">result =</span> <span class="st">"Result"</span>, <span class="at">detail =</span> <span class="st">"Detail"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sens <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(assumption, setting,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">best =</span> STRAT_LABELS[best],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            robust_mean,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">next_best =</span> <span class="fu">paste0</span>(STRAT_LABELS[next_best], <span class="st">" ("</span>, <span class="fu">fmt_m</span>(next_mean), <span class="st">")"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            robust_p95, textbook_p95) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">assumption =</span> <span class="st">"Assumption"</span>, <span class="at">setting =</span> <span class="st">"Setting"</span>, <span class="at">best =</span> <span class="st">"Best strategy"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">robust_mean =</span> <span class="st">"Robust"</span>, <span class="at">next_best =</span> <span class="st">"Next best"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">robust_p95 =</span> <span class="st">"Robust 1-in-20"</span>, <span class="at">textbook_p95 =</span> <span class="st">"Textbook 1-in-20"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_currency</span>(<span class="at">columns =</span> <span class="fu">c</span>(robust_mean, robust_p95, textbook_p95),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">decimals =</span> <span class="dv">1</span>, <span class="at">pattern =</span> <span class="st">"{x}M"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"left"</span>, <span class="at">columns =</span> <span class="fu">c</span>(assumption, setting, best, next_best))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="tbl-diagnostics" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<div id="tbl-sensitivity" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Automated checks run when the results were built.
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Expected loss if we misjudge the crew, with one assumption changed at a time.
 </figcaption>
-<div aria-describedby="tbl-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="bhucocifzm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bhucocifzm table {
+<div id="rvetjayyuw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rvetjayyuw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bhucocifzm thead, #bhucocifzm tbody, #bhucocifzm tfoot, #bhucocifzm tr, #bhucocifzm td, #bhucocifzm th {
+#rvetjayyuw thead, #rvetjayyuw tbody, #rvetjayyuw tfoot, #rvetjayyuw tr, #rvetjayyuw td, #rvetjayyuw th {
   border-style: none;
 }
 
-#bhucocifzm p {
+#rvetjayyuw p {
   margin: 0;
   padding: 0;
 }
 
-#bhucocifzm .gt_table {
+#rvetjayyuw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -833,12 +841,12 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-left-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_caption {
+#rvetjayyuw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bhucocifzm .gt_title {
+#rvetjayyuw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -850,7 +858,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-bottom-width: 0;
 }
 
-#bhucocifzm .gt_subtitle {
+#rvetjayyuw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -862,7 +870,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-top-width: 0;
 }
 
-#bhucocifzm .gt_heading {
+#rvetjayyuw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -874,13 +882,13 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-right-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_bottom_border {
+#rvetjayyuw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_col_headings {
+#rvetjayyuw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -895,7 +903,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-right-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_col_heading {
+#rvetjayyuw .gt_col_heading {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -915,7 +923,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   overflow-x: hidden;
 }
 
-#bhucocifzm .gt_column_spanner_outer {
+#rvetjayyuw .gt_column_spanner_outer {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -927,15 +935,15 @@ Table&nbsp;2: Automated checks run when the results were built.
   padding-right: 4px;
 }
 
-#bhucocifzm .gt_column_spanner_outer:first-child {
+#rvetjayyuw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bhucocifzm .gt_column_spanner_outer:last-child {
+#rvetjayyuw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bhucocifzm .gt_column_spanner {
+#rvetjayyuw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -947,11 +955,11 @@ Table&nbsp;2: Automated checks run when the results were built.
   width: 100%;
 }
 
-#bhucocifzm .gt_spanner_row {
+#rvetjayyuw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bhucocifzm .gt_group_heading {
+#rvetjayyuw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -977,7 +985,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   text-align: left;
 }
 
-#bhucocifzm .gt_empty_group_heading {
+#rvetjayyuw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -992,15 +1000,15 @@ Table&nbsp;2: Automated checks run when the results were built.
   vertical-align: middle;
 }
 
-#bhucocifzm .gt_from_md > :first-child {
+#rvetjayyuw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bhucocifzm .gt_from_md > :last-child {
+#rvetjayyuw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bhucocifzm .gt_row {
+#rvetjayyuw .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -1019,7 +1027,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   overflow-x: hidden;
 }
 
-#bhucocifzm .gt_stub {
+#rvetjayyuw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1032,7 +1040,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   padding-right: 5px;
 }
 
-#bhucocifzm .gt_stub_row_group {
+#rvetjayyuw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1046,15 +1054,15 @@ Table&nbsp;2: Automated checks run when the results were built.
   vertical-align: top;
 }
 
-#bhucocifzm .gt_row_group_first td {
+#rvetjayyuw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bhucocifzm .gt_row_group_first th {
+#rvetjayyuw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bhucocifzm .gt_summary_row {
+#rvetjayyuw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1064,16 +1072,16 @@ Table&nbsp;2: Automated checks run when the results were built.
   padding-right: 5px;
 }
 
-#bhucocifzm .gt_first_summary_row {
+#rvetjayyuw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_first_summary_row.thick {
+#rvetjayyuw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bhucocifzm .gt_last_summary_row {
+#rvetjayyuw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1083,7 +1091,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-bottom-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_grand_summary_row {
+#rvetjayyuw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1093,7 +1101,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   padding-right: 5px;
 }
 
-#bhucocifzm .gt_first_grand_summary_row {
+#rvetjayyuw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1103,7 +1111,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-top-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_last_grand_summary_row_top {
+#rvetjayyuw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1113,11 +1121,11 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-bottom-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_striped {
+#rvetjayyuw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bhucocifzm .gt_table_body {
+#rvetjayyuw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1126,7 +1134,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-bottom-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_footnotes {
+#rvetjayyuw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1140,7 +1148,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-right-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_footnote {
+#rvetjayyuw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1149,7 +1157,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   padding-right: 5px;
 }
 
-#bhucocifzm .gt_sourcenotes {
+#rvetjayyuw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1163,7 +1171,7 @@ Table&nbsp;2: Automated checks run when the results were built.
   border-right-color: #D3D3D3;
 }
 
-#bhucocifzm .gt_sourcenote {
+#rvetjayyuw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1171,72 +1179,649 @@ Table&nbsp;2: Automated checks run when the results were built.
   padding-right: 5px;
 }
 
-#bhucocifzm .gt_left {
+#rvetjayyuw .gt_left {
   text-align: left;
 }
 
-#bhucocifzm .gt_center {
+#rvetjayyuw .gt_center {
   text-align: center;
 }
 
-#bhucocifzm .gt_right {
+#rvetjayyuw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bhucocifzm .gt_font_normal {
+#rvetjayyuw .gt_font_normal {
   font-weight: normal;
 }
 
-#bhucocifzm .gt_font_bold {
+#rvetjayyuw .gt_font_bold {
   font-weight: bold;
 }
 
-#bhucocifzm .gt_font_italic {
+#rvetjayyuw .gt_font_italic {
   font-style: italic;
 }
 
-#bhucocifzm .gt_super {
+#rvetjayyuw .gt_super {
   font-size: 65%;
 }
 
-#bhucocifzm .gt_footnote_marks {
+#rvetjayyuw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bhucocifzm .gt_asterisk {
+#rvetjayyuw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bhucocifzm .gt_indent_1 {
+#rvetjayyuw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bhucocifzm .gt_indent_2 {
+#rvetjayyuw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bhucocifzm .gt_indent_3 {
+#rvetjayyuw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bhucocifzm .gt_indent_4 {
+#rvetjayyuw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bhucocifzm .gt_indent_5 {
+#rvetjayyuw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bhucocifzm .katex-display {
+#rvetjayyuw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bhucocifzm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rvetjayyuw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="assumption" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Assumption</th>
+<th id="setting" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Setting</th>
+<th id="best" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Best strategy</th>
+<th id="robust_mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Robust</th>
+<th id="next_best" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Next best</th>
+<th id="robust_p95" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Robust 1-in-20</th>
+<th id="textbook_p95" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Textbook 1-in-20</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="assumption">Base case</td>
+<td class="gt_row gt_left" headers="setting">As published</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$9.0M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($10.7M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$14.9M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$46.5M</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="assumption">A6 covered-attack share</td>
+<td class="gt_row gt_left" headers="setting">5%</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$8.7M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($10.3M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$14.1M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$45.8M</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="assumption">A6 covered-attack share</td>
+<td class="gt_row gt_left" headers="setting">20%</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$9.6M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($11.5M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$16.5M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$48.0M</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="assumption">A7 coverage floor</td>
+<td class="gt_row gt_left" headers="setting">15%</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$9.0M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($10.5M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$14.9M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$51.9M</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="assumption">A7 coverage floor</td>
+<td class="gt_row gt_left" headers="setting">35%</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$9.3M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($11.5M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$19.8M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$23.8M</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="assumption">A10 misjudgment size (sigma)</td>
+<td class="gt_row gt_left" headers="setting">0.20</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$7.7M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($9.7M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$8.1M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$23.2M</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="assumption">A10 misjudgment size (sigma)</td>
+<td class="gt_row gt_left" headers="setting">0.50</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$10.6M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($11.5M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$19.4M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$46.5M</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="assumption">A11 lateral movement</td>
+<td class="gt_row gt_left" headers="setting">Identity loss 30, corporate IT loss 22</td>
+<td class="gt_row gt_left" headers="best">Robust equilibrium</td>
+<td class="gt_row gt_right" headers="robust_mean">$14.5M</td>
+<td class="gt_row gt_left" headers="next_best">Proportional ($16.2M)</td>
+<td class="gt_row gt_right" headers="robust_p95">$19.8M</td>
+<td class="gt_row gt_right" headers="textbook_p95">$46.5M</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="reader-note">
+<p><strong>How to read the table.</strong> Each row changes one assumption and reruns every strategy. Values are expected loss in $M when we misjudge the crew; the last two columns are the 1-in-20 bad case.</p>
+<p><strong>What the table tells you.</strong> The ranking does not depend on these settings. Larger misjudgment raises every loss but robust still leads, and the textbook plan’s bad case stays far above robust’s.</p>
+</div>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>The model has no repeated play: one campaign, one decision. It has no deception or honeypots, which can change what the crew sees. It has one attacker type, so insiders and state actors are out of scope. Assets fail independently: a breach of identity or corporate IT does not spread to other systems, although real ransomware crews often move laterally. The sensitivity table tests a simple version of this. The budget is static, so it does not respond to new intelligence during the year.</p>
+<p>Natural follow-ons are repeated play, mixtures of attacker types, and the attack-graph Markov chain project.</p>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>For a framework that tests any risk model, see <a href="https://patrick-lefler.com/rQuarto_three_questions_for_any_risk_model_2026-10-22/">Three Questions for Any Risk Model</a>.</p>
+</section>
+<section id="diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="diagnostics">Diagnostics</h2>
+<p>All 7 automated checks ran when the results were built; 7 passed.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diag <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">check =</span> <span class="st">"Check"</span>, <span class="at">result =</span> <span class="st">"Result"</span>, <span class="at">detail =</span> <span class="st">"Detail"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-diagnostics" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Automated checks run when the results were built.
+</figcaption>
+<div aria-describedby="tbl-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="hfodfyspyr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hfodfyspyr table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hfodfyspyr thead, #hfodfyspyr tbody, #hfodfyspyr tfoot, #hfodfyspyr tr, #hfodfyspyr td, #hfodfyspyr th {
+  border-style: none;
+}
+
+#hfodfyspyr p {
+  margin: 0;
+  padding: 0;
+}
+
+#hfodfyspyr .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hfodfyspyr .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hfodfyspyr .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hfodfyspyr .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_col_heading {
+  color: #333333;
+  background-color: #F2F2F2;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hfodfyspyr .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #F2F2F2;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hfodfyspyr .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hfodfyspyr .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hfodfyspyr .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hfodfyspyr .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hfodfyspyr .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hfodfyspyr .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hfodfyspyr .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hfodfyspyr .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hfodfyspyr .gt_row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hfodfyspyr .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfodfyspyr .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hfodfyspyr .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hfodfyspyr .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hfodfyspyr .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfodfyspyr .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hfodfyspyr .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfodfyspyr .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hfodfyspyr .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfodfyspyr .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfodfyspyr .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfodfyspyr .gt_left {
+  text-align: left;
+}
+
+#hfodfyspyr .gt_center {
+  text-align: center;
+}
+
+#hfodfyspyr .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hfodfyspyr .gt_font_normal {
+  font-weight: normal;
+}
+
+#hfodfyspyr .gt_font_bold {
+  font-weight: bold;
+}
+
+#hfodfyspyr .gt_font_italic {
+  font-style: italic;
+}
+
+#hfodfyspyr .gt_super {
+  font-size: 65%;
+}
+
+#hfodfyspyr .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hfodfyspyr .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hfodfyspyr .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hfodfyspyr .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hfodfyspyr .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hfodfyspyr .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hfodfyspyr .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hfodfyspyr .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hfodfyspyr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1301,38 +1886,38 @@ Table&nbsp;2: Automated checks run when the results were built.
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Item =</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"Seed"</span>, <span class="fu">names</span>(si<span class="sc">$</span>packages)),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(si<span class="sc">$</span>r_version, <span class="fu">as.character</span>(si<span class="sc">$</span>seed), <span class="fu">unname</span>(si<span class="sc">$</span>packages))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Item =</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"Seed"</span>, <span class="fu">names</span>(si<span class="sc">$</span>packages)),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(si<span class="sc">$</span>r_version, <span class="fu">as.character</span>(si<span class="sc">$</span>seed), <span class="fu">unname</span>(si<span class="sc">$</span>packages))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_se</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-session" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-session-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Software versions and seed used to build the results.
+Table&nbsp;4: Software versions and seed used to build the results.
 </figcaption>
 <div aria-describedby="tbl-session-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ctyvimtecq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ctyvimtecq table {
+<div id="sploqvcvjy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sploqvcvjy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ctyvimtecq thead, #ctyvimtecq tbody, #ctyvimtecq tfoot, #ctyvimtecq tr, #ctyvimtecq td, #ctyvimtecq th {
+#sploqvcvjy thead, #sploqvcvjy tbody, #sploqvcvjy tfoot, #sploqvcvjy tr, #sploqvcvjy td, #sploqvcvjy th {
   border-style: none;
 }
 
-#ctyvimtecq p {
+#sploqvcvjy p {
   margin: 0;
   padding: 0;
 }
 
-#ctyvimtecq .gt_table {
+#sploqvcvjy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1358,12 +1943,12 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-left-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_caption {
+#sploqvcvjy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ctyvimtecq .gt_title {
+#sploqvcvjy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1375,7 +1960,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-bottom-width: 0;
 }
 
-#ctyvimtecq .gt_subtitle {
+#sploqvcvjy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1387,7 +1972,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-top-width: 0;
 }
 
-#ctyvimtecq .gt_heading {
+#sploqvcvjy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1399,13 +1984,13 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-right-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_bottom_border {
+#sploqvcvjy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_col_headings {
+#sploqvcvjy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1420,7 +2005,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-right-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_col_heading {
+#sploqvcvjy .gt_col_heading {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -1440,7 +2025,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   overflow-x: hidden;
 }
 
-#ctyvimtecq .gt_column_spanner_outer {
+#sploqvcvjy .gt_column_spanner_outer {
   color: #333333;
   background-color: #F2F2F2;
   font-size: 100%;
@@ -1452,15 +2037,15 @@ Table&nbsp;3: Software versions and seed used to build the results.
   padding-right: 4px;
 }
 
-#ctyvimtecq .gt_column_spanner_outer:first-child {
+#sploqvcvjy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ctyvimtecq .gt_column_spanner_outer:last-child {
+#sploqvcvjy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ctyvimtecq .gt_column_spanner {
+#sploqvcvjy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1472,11 +2057,11 @@ Table&nbsp;3: Software versions and seed used to build the results.
   width: 100%;
 }
 
-#ctyvimtecq .gt_spanner_row {
+#sploqvcvjy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ctyvimtecq .gt_group_heading {
+#sploqvcvjy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1502,7 +2087,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   text-align: left;
 }
 
-#ctyvimtecq .gt_empty_group_heading {
+#sploqvcvjy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1517,15 +2102,15 @@ Table&nbsp;3: Software versions and seed used to build the results.
   vertical-align: middle;
 }
 
-#ctyvimtecq .gt_from_md > :first-child {
+#sploqvcvjy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ctyvimtecq .gt_from_md > :last-child {
+#sploqvcvjy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ctyvimtecq .gt_row {
+#sploqvcvjy .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -1544,7 +2129,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   overflow-x: hidden;
 }
 
-#ctyvimtecq .gt_stub {
+#sploqvcvjy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1557,7 +2142,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   padding-right: 5px;
 }
 
-#ctyvimtecq .gt_stub_row_group {
+#sploqvcvjy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1571,15 +2156,15 @@ Table&nbsp;3: Software versions and seed used to build the results.
   vertical-align: top;
 }
 
-#ctyvimtecq .gt_row_group_first td {
+#sploqvcvjy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ctyvimtecq .gt_row_group_first th {
+#sploqvcvjy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ctyvimtecq .gt_summary_row {
+#sploqvcvjy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1589,16 +2174,16 @@ Table&nbsp;3: Software versions and seed used to build the results.
   padding-right: 5px;
 }
 
-#ctyvimtecq .gt_first_summary_row {
+#sploqvcvjy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_first_summary_row.thick {
+#sploqvcvjy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ctyvimtecq .gt_last_summary_row {
+#sploqvcvjy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1608,7 +2193,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-bottom-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_grand_summary_row {
+#sploqvcvjy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1618,7 +2203,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   padding-right: 5px;
 }
 
-#ctyvimtecq .gt_first_grand_summary_row {
+#sploqvcvjy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1628,7 +2213,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-top-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_last_grand_summary_row_top {
+#sploqvcvjy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1638,11 +2223,11 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-bottom-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_striped {
+#sploqvcvjy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ctyvimtecq .gt_table_body {
+#sploqvcvjy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1651,7 +2236,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-bottom-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_footnotes {
+#sploqvcvjy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1665,7 +2250,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-right-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_footnote {
+#sploqvcvjy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1674,7 +2259,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   padding-right: 5px;
 }
 
-#ctyvimtecq .gt_sourcenotes {
+#sploqvcvjy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1688,7 +2273,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
   border-right-color: #D3D3D3;
 }
 
-#ctyvimtecq .gt_sourcenote {
+#sploqvcvjy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1696,72 +2281,72 @@ Table&nbsp;3: Software versions and seed used to build the results.
   padding-right: 5px;
 }
 
-#ctyvimtecq .gt_left {
+#sploqvcvjy .gt_left {
   text-align: left;
 }
 
-#ctyvimtecq .gt_center {
+#sploqvcvjy .gt_center {
   text-align: center;
 }
 
-#ctyvimtecq .gt_right {
+#sploqvcvjy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ctyvimtecq .gt_font_normal {
+#sploqvcvjy .gt_font_normal {
   font-weight: normal;
 }
 
-#ctyvimtecq .gt_font_bold {
+#sploqvcvjy .gt_font_bold {
   font-weight: bold;
 }
 
-#ctyvimtecq .gt_font_italic {
+#sploqvcvjy .gt_font_italic {
   font-style: italic;
 }
 
-#ctyvimtecq .gt_super {
+#sploqvcvjy .gt_super {
   font-size: 65%;
 }
 
-#ctyvimtecq .gt_footnote_marks {
+#sploqvcvjy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ctyvimtecq .gt_asterisk {
+#sploqvcvjy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ctyvimtecq .gt_indent_1 {
+#sploqvcvjy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ctyvimtecq .gt_indent_2 {
+#sploqvcvjy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ctyvimtecq .gt_indent_3 {
+#sploqvcvjy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ctyvimtecq .gt_indent_4 {
+#sploqvcvjy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ctyvimtecq .gt_indent_5 {
+#sploqvcvjy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ctyvimtecq .katex-display {
+#sploqvcvjy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ctyvimtecq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sploqvcvjy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1819,6 +2404,7 @@ Table&nbsp;3: Software versions and seed used to build the results.
 <p><strong>How to read the table.</strong> The first row is the R version, the second the random seed, and the rest are the software packages that matter for the results.</p>
 <p><strong>What the table tells you.</strong> Anyone with these versions and seed can reproduce the numbers on this site exactly. A different seed gives slightly different Monte Carlo results.</p>
 </div>
+<p><strong>Reproduce.</strong> Code and data: <a href="https://github.com/patrick-lefler/rQuarto_defender_attacker-game_theory">GitHub repository</a>. From the project root run <code>Rscript R/run_all.R</code>, then <code>quarto render</code>.</p>
 </section>
 <section id="session-information" class="level2">
 <h2 class="anchored" data-anchor-id="session-information">Session Information</h2>
