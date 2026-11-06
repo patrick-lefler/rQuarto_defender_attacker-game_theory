@@ -98,7 +98,7 @@ base$strategies |>
   ggplot(aes(asset, coverage, fill = hit)) +
   geom_col(width = 0.75) +
   facet_wrap(~strategy, ncol = 2) +
-  scale_fill_manual(values = c("Crew's target" = "#D98C3A", "Other asset" = "#B5B5B5"), name = NULL) +
+  scale_fill_manual(values = c("Crew's target" = "#7A3E9D", "Other asset" = "#C8C8C8"), name = NULL) +
   scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
   labs(x = NULL, y = "Coverage") +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))

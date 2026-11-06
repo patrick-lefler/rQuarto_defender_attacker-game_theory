@@ -10,7 +10,7 @@ main_31 <- function() {
   save_result(out, "qre_sweep")
 
   # Which lambda to optimize the robust strategy at? Compare misestimation MC means.
-  mult <- misest_multipliers()
+  mult <- misest_multipliers(seed = SEED + 100)   # choose lambda on draws not used for reporting
   choice <- purrr::map(c(1, 2, 3, 5), \(l) {
     cov <- solve_robust(BUDGET_BASE, assets, lambda = l)
     mc <- run_misestimation(list(robust = cov), assets, mult = mult)$summary
