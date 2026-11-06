@@ -17,6 +17,17 @@ cut_mean <- 1 - mean_of("robust") / mean_of("risk_ranked")
 cut_tail <- 1 - p95_of("robust") / p95_of("risk_ranked")
 ```
 
+``` {r setup_inline_values}
+
+rr  <- base |> filter(strategy == "risk_ranked")
+rb  <- base |> filter(strategy == "robust")
+rrm <- ms   |> filter(strategy == "risk_ranked")
+rbm <- ms   |> filter(strategy == "robust")
+
+```
+
+
+
 *All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative and synthetic.*
 
 ## The problem
@@ -27,43 +38,56 @@ We study a 500-person fintech firm whose cloud platform is critical infrastructu
 
 ## Three findings
 
-1. **Risk-ranking invites the attack.** Funding the top risks first leaves identity at baseline coverage, and the crew goes there. Expected loss is `r fmt_m(mean_of("risk_ranked"), 0)`, against `r fmt_m(mean_of("robust"), 0)` for the robust allocation.
+1. **Risk-ranking invites the attack.** Funding the top risks first leaves identity at baseline coverage, and the crew goes there. If we read the crew perfectly, expected loss is `r fmt_m(rr$loss_rational)` against `r fmt_m(rb$loss_rational)` for the robust allocation; if we misjudge it, `r fmt_m(rrm$mean)` against `r fmt_m(rbm$mean)`.
+
+
 2. **The textbook equilibrium looks best on paper and is worst under uncertainty.** If we read the crew perfectly, it cuts loss to `r fmt_m(rat_of("textbook"))`. If we misjudge the crew modestly, the 95th percentile loss is `r fmt_m(p95_of("textbook"), 0)`.
 3. **The robust allocation anticipates the attacker without betting on a perfect read.** It cuts expected loss by `r fmt_pct(cut_mean)` and the tail by `r fmt_pct(cut_tail)` against risk-ranked.
 
 ```{r}
+
 #| label: fig-hero
-#| fig-cap: "Expected loss if we read the crew perfectly and if we misjudge it, by strategy. Whiskers show the 95th percentile."
-#| fig-alt: "Horizontal paired bars for five strategies, ordered by loss under misjudgment. The robust strategy has the lowest misjudged loss at about 9 million dollars. The textbook equilibrium has the lowest loss under perfect reading, 4.9 million, but the highest under misjudgment with a 95th percentile of 46 million."
+#| fig-cap: "Expected loss per campaign by strategy, if we read the crew perfectly and if we misjudge it. The line runs to the 1-in-20 bad case."
+#| fig-alt: "Paired horizontal bars for five strategies, ordered by loss under misjudgment. Robust has the lowest misjudged loss at 9.0 million dollars with a 1-in-20 bad case of 14.9 million. The textbook equilibrium has the lowest loss if read perfectly, 4.9 million, but the highest under misjudgment, 15.3 million, with a 1-in-20 bad case of 46.5 million."
 #| fig-height: 5
 ord <- ms |> arrange(mean) |> pull(strategy)
 d <- ms |>
   select(strategy, mean, p95) |>
   left_join(base |> select(strategy, loss_rational), by = "strategy") |>
-  tidyr::pivot_longer(c(loss_rational, mean), names_to = "case", values_to = "loss") |>
-  mutate(
-    case = factor(case, levels = c("mean", "loss_rational"),
-                  labels = c("If we misjudge the crew", "If we read the crew perfectly")),
-    strategy = factor(strategy, levels = rev(ord)),
-    p95 = ifelse(case == "If we misjudge the crew", p95, NA_real_),
-    lab = ifelse(strategy == "robust", "Robust", "")
-  )
-ggplot(d, aes(loss, strategy, fill = strategy, alpha = case, group = case)) +
-  geom_col(position = position_dodge(width = 0.8), width = 0.75) +
-  geom_errorbar(
-    aes(xmin = loss, xmax = p95), width = 0.25, alpha = 1, color = "black",
-    position = position_dodge(width = 0.8), na.rm = TRUE
-  ) +
-  geom_text(aes(x = ifelse(is.na(p95), loss, p95), label = fmt_m(loss)),
-            position = position_dodge(width = 0.8), hjust = -0.15, size = 3.4,
-            color = "black", alpha = 1) +
+  mutate(y = match(strategy, rev(ord)))            # numeric row position, best on top
+bar_h <- 0.34
+ggplot(d) +
+  # light bar: crew read perfectly (upper half of each row)
+  geom_rect(aes(xmin = 0, xmax = loss_rational, ymin = y + 0.02, ymax = y + 0.02 + bar_h,
+                fill = strategy), alpha = 0.4) +
+  # dark bar: crew misjudged (lower half of each row)
+  geom_rect(aes(xmin = 0, xmax = mean, ymin = y - 0.02 - bar_h, ymax = y - 0.02,
+                fill = strategy)) +
+  # whisker from the misjudged mean to the 95th percentile
+  geom_segment(aes(x = mean, xend = p95, y = y - 0.02 - bar_h / 2, yend = y - 0.02 - bar_h / 2),
+               color = "gray25", linewidth = 0.5) +
+  geom_segment(aes(x = p95, xend = p95, y = y - 0.02 - bar_h * 0.85, yend = y - 0.02 - bar_h * 0.15),
+               color = "gray25", linewidth = 0.5) +
+  # labels
+  geom_text(aes(x = loss_rational, y = y + 0.02 + bar_h / 2, label = fmt_m(loss_rational)),
+            hjust = -0.15, size = 3.4, color = "gray20") +
+  geom_text(aes(x = mean, y = y - 0.02 - bar_h / 2, label = fmt_m(mean),
+                color = strategy == "uniform"),               # dark text on the pale bar
+            hjust = 1.15, size = 3.4, fontface = "bold") +
+  scale_color_manual(values = c(`TRUE` = "gray15", `FALSE` = "white"), guide = "none") +
+  geom_text(aes(x = p95, y = y - 0.02 - bar_h / 2, label = paste0("1-in-20: ", fmt_m(p95))),
+            hjust = -0.1, size = 3.1, color = "gray30") +
   scale_fill_manual(values = STRAT_COLS, guide = "none") +
-  scale_alpha_manual(values = c("If we misjudge the crew" = 1, "If we read the crew perfectly" = 0.45), name = NULL,
-                     guide = guide_legend(override.aes = list(fill = "gray30"), reverse = TRUE)) +
-  scale_y_discrete(labels = STRAT_LABELS) +
-  scale_x_continuous(labels = scales::label_dollar(suffix = "M"), expand = expansion(mult = c(0, 0.1))) +
+  scale_y_continuous(breaks = d$y, labels = STRAT_LABELS[d$strategy], expand = expansion(add = 0.3)) +
+  scale_x_continuous(labels = scales::label_dollar(suffix = "M"),
+                     limits = c(0, max(d$p95) * 1.28), expand = expansion(mult = c(0, 0))) +
   labs(x = "Expected loss per campaign", y = NULL,
-       title = "Robust wins when we are wrong about the crew")
+       title = "Robust wins when we are wrong about the crew",
+       subtitle = "Light bar: if we read the crew perfectly.  Dark bar: if we misjudge it (line to the 1-in-20 bad case).") +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor = element_blank(),
+        plot.subtitle = element_text(size = 10))
+
+
 ```
 
 ::: {.reader-note}
