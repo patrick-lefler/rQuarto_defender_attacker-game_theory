@@ -87,3 +87,13 @@ tibble::tibble(
 
 **What the table tells you.** Anyone with these versions and seed can reproduce the numbers on this site exactly. A different seed gives slightly different Monte Carlo results.
 :::
+
+
+## Session Information
+
+``` {r session-information}
+#| echo: false
+
+utils::sessionInfo()
+
+```
