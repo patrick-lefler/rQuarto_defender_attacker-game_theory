@@ -28,6 +28,17 @@ fr_gap <- fr |> mutate(gap = mc_mean - min(mc_mean), .by = budget) |> filter(str
 exc <- fr_gap$budget
 b0 <- BUDGET_BASE; b1 <- BUDGET_BASE + 1
 gain <- \(s) at_b(s, b0, "mc_mean") - at_b(s, b1, "mc_mean")
+
+flat_b <- fr |> group_by(strategy) |>
+  mutate(end = mc_mean[budget == max(budget)]) |>
+  filter(abs(mc_mean - end) < 1e-6) |>
+  summarise(b = min(budget)) |> pull(b) |> max()
+rr_win <- fr |> filter(strategy == "risk_ranked", budget >= 11, budget <= 14)
+rr_lo  <- rr_win$budget[which.min(rr_win$mc_mean)]
+rr_hi  <- rr_win$budget[which.max(rr_win$mc_mean)]
+tb_win <- fr |> filter(strategy == "textbook", budget >= BUDGET_BASE, budget <= 12)
+tb_hi  <- tb_win$budget[which.max(tb_win$mc_mean)]
+
 ```
 
 *All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.*
@@ -54,6 +65,10 @@ hits <- draws |>
   mutate(xmid = cumsum(share) - share / 2, .by = strategy)
 callout <- hits |> filter(target == "PIPE", share >= 0.03)   # rare but costly hits
 
+share_of <- \(s, a) sum(hits$share[hits$strategy == s & hits$target == a])
+rb_corp  <- share_of("robust", "CORP")
+tb_pipe  <- share_of("textbook", "PIPE")
+
 ggplot(hits, aes(x = share, y = strategy, fill = asset)) +
   geom_col(width = 0.7, color = "white", linewidth = 0.3,
            position = position_stack(reverse = TRUE)) +
@@ -75,7 +90,9 @@ ggplot(hits, aes(x = share, y = strategy, fill = asset)) +
 ::: {.reader-note}
 **How to read the plot.** Each bar is one strategy, ordered from lowest average loss (top) to highest. The colored segments show the share of simulated crews that attack each asset, and the label is what that attack would cost us.
 
-**What the plot tells you.** Robust funnels about two-thirds of crews onto Corporate IT, a cheap hit. The textbook plan scatters them across all six assets, and about one crew in eighteen reaches the pipeline, a $46.5M loss.
+**What the plot tells you.** Robust has the lowest loss at nearly every budget. More money does not always help a simple plan. Risk-ranked rises from `r fmt_m(at_b("risk_ranked", rr_lo, "mc_mean"))` at `r fmt_m(rr_lo)` to `r fmt_m(at_b("risk_ranked", rr_hi, "mc_mean"))` at `r fmt_m(rr_hi)`, and textbook from `r fmt_m(at_b("textbook", BUDGET_BASE, "mc_mean"))` at `r fmt_m(BUDGET_BASE)` to `r fmt_m(at_b("textbook", tb_hi, "mc_mean"))` at `r fmt_m(tb_hi)`. New coverage pushes the crew toward an asset we left thin. The exception at `r paste(fmt_m(exc), collapse = ", ")` is expected: robust is built to beat a sharp crew, and against that crew it still wins at this budget, but in the misjudgment test a baseline edges it out. Above `r fmt_m(flat_b)`, every asset reaches its coverage cap and all lines flatten.
+
+
 :::
 
 ```{r}
@@ -98,8 +115,9 @@ ms |>
 **What the table tells you.** The robust strategy has the lowest average and the smallest bad cases. The textbook equilibrium has the worst average, and its 95th percentile is `r sprintf('%.1f', p95_of('textbook') / p95_of('robust'))` times the robust figure. The crew's favourite target also differs across strategies.
 :::
 
-::: {.callout-tip title="What perfect intelligence would be worth"}
-Perfect intelligence would save the robust strategy `r fmt_m(mean_of("robust") - rat_of("robust"))` of expected loss, and the textbook strategy `r fmt_m(mean_of("textbook") - rat_of("textbook"))`. These gaps measure how much each strategy depends on accurate intelligence. Textbook depends on it far more.
+
+::: {.callout-tip title="How much each strategy relies on a perfect read"}
+If our read of the crew is wrong, the robust strategy loses `r fmt_m(mean_of("robust") - rat_of("robust"))` more than planned, and the textbook strategy loses `r fmt_m(mean_of("textbook") - rat_of("textbook"))` more. The textbook plan's efficiency rests almost entirely on accurate intelligence.
 :::
 
 ## The robust equilibrium
@@ -238,4 +256,6 @@ html`<div class="slider-sentence">At <b>$${budget.toFixed(1)}M</b>, the crew's b
 **How to read the plot.** Drag the slider to choose a budget. Each group of bars is an asset, with the grey bar for risk-ranked coverage and the blue bar for the robust strategy. The sentence under the chart states the crew's likely target and our expected loss under each approach.
 
 **What the plot tells you.** As the budget changes, risk-ranked keeps funding the same few assets, while the robust strategy spreads protection toward the places a crew is likely to hit. The sentence shows what that difference costs us.
+
+**Reproduce.** Code and data: [GitHub repository](https://github.com/patrick-lefler/rQuarto_defender_attacker-game_theory). From the project root run `Rscript R/run_all.R`, then `quarto render`.
 :::

@@ -8,6 +8,9 @@ STRAT_LTY <- c(robust = "solid", textbook = "dashed", proportional = "dotted",
                uniform = "dotdash", risk_ranked = "longdash")
 ASSET_SHORT <- c(PLAT = "Platform", PIPE = "Pipeline", DATA = "Client data",
                  IDP = "Identity", CORP = "Corporate IT", VEND = "Vendor")
+ASSET_PROSE <- c(PLAT = "the platform", PIPE = "the pipeline", DATA = "client data",
+                 IDP = "identity systems", CORP = "corporate IT", VEND = "vendor access")
+
 
 theme_se <- function(base_size = 12) {
   ggplot2::theme_minimal(base_size = base_size) +
