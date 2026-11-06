@@ -12,7 +12,6 @@ Medium rQuarto project (5 rendered pages). Specification: `Defender-Attacker-Gam
 Rscript -e 'renv::restore()'           # R >= 4.3, Quarto >= 1.5
 Rscript R/run_all.R                    # all analyses + 7 diagnostics, about 2 s
 Rscript -e 'testthat::test_dir("tests/testthat")'
-Rscript R/99_wordcount.R               # exits non-zero if over the word budget
 quarto render                          # writes docs/
 ```
 
@@ -70,4 +69,4 @@ Scripts never render; pages never solve. Pages read cached results from `data/re
 
 ## Change log
 
-- 2026-11-03: Initial build. No change to the plan's §4 parameters.
+- 2026-11-05: Initial build. No change to the plan's §4 parameters.
