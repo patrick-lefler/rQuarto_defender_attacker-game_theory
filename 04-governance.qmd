@@ -11,6 +11,8 @@ diag <- read_result("diagnostics")
 si <- read_result("session_info")
 reg <- readr::read_csv(file.path(PROJECT_ROOT, "data", "assumptions_register.csv"), show_col_types = FALSE)
 n_pass <- sum(diag$result == "pass")
+sens <- read_result("sensitivity")
+n_rob <- sum(sens$best == "robust")
 ```
 
 *All money is in $M. Losses are expected loss per targeted ransomware campaign, and the model assumes one campaign per year. All values are illustrative.*
@@ -40,9 +42,38 @@ reg |>
 **What the table tells you.** Several assumptions are not tested here. These are the first places to look when applying the approach to real data, because a wrong assumption can reorder the strategies.
 :::
 
+## Sensitivity
+ 
+We changed one assumption at a time and reran the full comparison. The robust strategy was best in `r n_rob` of `r nrow(sens)` cases, including a lateral-movement case where an identity or corporate IT breach spreads and costs more.
+ 
+```{r}
+#| label: tbl-sensitivity
+#| tbl-cap: "Expected loss if we misjudge the crew, with one assumption changed at a time."
+sens |>
+  transmute(assumption, setting,
+            best = STRAT_LABELS[best],
+            robust_mean,
+            next_best = paste0(STRAT_LABELS[next_best], " (", fmt_m(next_mean), ")"),
+            robust_p95, textbook_p95) |>
+  gt() |>
+  cols_label(assumption = "Assumption", setting = "Setting", best = "Best strategy",
+             robust_mean = "Robust", next_best = "Next best",
+             robust_p95 = "Robust 1-in-20", textbook_p95 = "Textbook 1-in-20") |>
+  fmt_currency(columns = c(robust_mean, robust_p95, textbook_p95),
+               decimals = 1, pattern = "{x}M") |>
+  gt_se() |>
+  cols_align(align = "left", columns = c(assumption, setting, best, next_best))
+```
+
+::: {.reader-note}
+**How to read the table.** Each row changes one assumption and reruns every strategy. Values are expected loss in $M when we misjudge the crew; the last two columns are the 1-in-20 bad case.
+ 
+**What the table tells you.** The ranking does not depend on these settings. Larger misjudgment raises every loss but robust still leads, and the textbook plan's bad case stays far above robust's.
+:::
+
 ## Limitations
 
-The model has no repeated play: one campaign, one decision. It has no deception or honeypots, which can change what the crew sees. It has one attacker type, so insiders and state actors are out of scope. The budget is static, so it does not respond to new intelligence during the year.
+The model has no repeated play: one campaign, one decision. It has no deception or honeypots, which can change what the crew sees. It has one attacker type, so insiders and state actors are out of scope. Assets fail independently: a breach of identity or corporate IT does not spread to other systems, although real ransomware crews often move laterally. The sensitivity table tests a simple version of this. The budget is static, so it does not respond to new intelligence during the year.
 
 Natural follow-ons are repeated play, mixtures of attacker types, and the attack-graph Markov chain project.
 
@@ -89,6 +120,7 @@ tibble::tibble(
 **What the table tells you.** Anyone with these versions and seed can reproduce the numbers on this site exactly. A different seed gives slightly different Monte Carlo results.
 :::
 
+**Reproduce.** Code and data: [GitHub repository](https://github.com/patrick-lefler/rQuarto_defender_attacker-game_theory). From the project root run `Rscript R/run_all.R`, then `quarto render`.
 
 ## Session Information
 
