@@ -2,11 +2,11 @@
 #   Rscript R/run_all.R
 for (f in c("R/00_params.R", "R/01_utils.R", "R/20_solve_sse.R", "R/21_baselines.R",
             "R/30_robust.R", "R/31_qre_sweep.R", "R/32_misestimation.R", "R/33_frontier.R",
-            "R/34_alignment_check.R", "R/99_wordcount.R")) source(f)
+            "R/34_alignment_check.R", "R/35_sensitivity.R",  "R/99_wordcount.R")) source(f)
 
 dir.create(RESULTS_DIR, showWarnings = FALSE, recursive = TRUE)
 t0 <- Sys.time()
-main_20(); main_30(); main_31(); main_32(); main_33(); main_34()
+main_20(); main_30(); main_31(); main_32(); main_33(); main_34(); main_35()
 
 assets <- load_assets()
 fr <- read_result("frontier")
