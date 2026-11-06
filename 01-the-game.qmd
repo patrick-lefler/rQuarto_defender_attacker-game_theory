@@ -91,7 +91,7 @@ tibble::tibble(
 
 ## The setup in one paragraph
 
-We choose how much coverage each asset gets. The crew sees our choice and attacks the target with the best payoff for it. We pick the coverage that minimizes our loss given that response. This is a Stackelberg game: we move first, the crew moves second. When the crew is indifferent between targets, we assume it breaks the tie in our favour.
+We choose how much coverage each asset gets. The crew sees our choice and attacks the target with the best payoff for it. We pick the coverage that minimizes our loss given that response. This is a Stackelberg game: we move first, the crew moves second. When the crew is indifferent between targets, we assume it breaks the tie in our favor.
 
 ::: {.callout-note collapse="true" title="The math"}
 Coverage $c_t \in [\text{floor},\, c^{max}_t]$ on target $t$ costs $k_t c_t$, with $\sum_t k_t c_t \le B$. Payoffs are
