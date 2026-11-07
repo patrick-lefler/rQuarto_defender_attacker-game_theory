@@ -124,7 +124,8 @@ tibble::tibble(
 
 ## Session Information
 
-::: {.callout-note collapse="true" title="Full R session information"}
+::: {.callout-note icon = false collapse="true"}
+## Full R session information
 ```{r}
 #| label: session-information
 #| echo: false

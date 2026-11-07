@@ -17,7 +17,7 @@ website:
     style: floating
     contents:
       - href: index.qmd
-        text: Summary
+        text: Executive Summary
       - href: 01-the-game.qmd
         text: The Game
       - href: 02-allocation.qmd
@@ -27,11 +27,8 @@ website:
       - href: 04-governance.qmd
         text: Governance
   page-footer:
-    center: "Seeking Eureka · Illustrative synthetic analysis · Not investment or security advice"
-    right:
-      - text: "Seeking Eureka projects"
-        href: https://seeking-eureka.com/projects.html
-
+    center: "Rendered with **R** & **Quarto** | Illustrative synthetic analysis | Not investment or security advice"
+    
 format:
   html:
     code-fold: true
