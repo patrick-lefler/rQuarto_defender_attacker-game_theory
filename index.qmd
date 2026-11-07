@@ -100,7 +100,7 @@ ggplot(d) +
 
 ## How to read this site
 
-- [**The Game:**](~01-the-game.html) a two-asset example shows why defending the biggest asset can fail.
-- **Allocation:** the firm, the six assets and four ways to split the budget.
-- **Robustness:** what happens when we misjudge the crew, and the robust strategy.
-- **Governance:** the assumptions, the limits and the automated checks.
+- [**The Game:**](https://patrick-lefler.com/rQuarto_defender_attacker-game_theory/01-the-game.html) a two-asset example shows why defending the biggest asset can fail.
+- [**Allocation:**](https://patrick-lefler.com/rQuarto_defender_attacker-game_theory/02-allocation.html) the firm, the six assets and four ways to split the budget.
+- [**Robustness:**](https://patrick-lefler.com/rQuarto_defender_attacker-game_theory/03-robustness.html) what happens when we misjudge the crew, and the robust strategy.
+- [**Governance:**](https://patrick-lefler.com/rQuarto_defender_attacker-game_theory/04-governance.html) the assumptions, the limits and the automated checks.
