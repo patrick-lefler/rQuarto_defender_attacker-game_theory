@@ -90,7 +90,8 @@ ggplot(d) +
 **What the plot tells you.** The textbook equilibrium has the lowest light bar and the highest dark bar: it is cheapest on paper and costliest when wrong. The robust strategy gives up some of the paper saving and has the lowest average and the shortest line.
 :::
 
-::: {.callout-tip title="Questions to ask your CISO"}
+::: {.callout-note icon = false}
+## Questions to ask your CISO
 1. Where does our current plan push an attacker?
 2. Which high-impact assets are we under-protecting because we assume attackers don't want them?
 3. How would our allocation perform if our threat intelligence is wrong?
@@ -99,7 +100,7 @@ ggplot(d) +
 
 ## How to read this site
 
-- **The Game:** a two-asset example shows why defending the biggest asset can fail.
+- [**The Game:**](~01-the-game.html) a two-asset example shows why defending the biggest asset can fail.
 - **Allocation:** the firm, the six assets and four ways to split the budget.
 - **Robustness:** what happens when we misjudge the crew, and the robust strategy.
 - **Governance:** the assumptions, the limits and the automated checks.
